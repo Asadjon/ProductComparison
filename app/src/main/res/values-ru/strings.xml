@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Сравнение продуктов</string>
-    <string name="main_fragment_label">Main Fragment</string>
+    <string name="main_fragment_label">Выберите продукт</string>
+    <string name="air_conditioner">Кондиционер</string>
+    <string name="built_in_oven">Печь</string>
+    <string name="dishwasher">Посудомоечная машина</string>
+    <string name="freezer">Морозильник</string>
+    <string name="kitchen_hood">Вытяжка</string>
+    <string name="microwave">Микроволновая печь</string>
+    <string name="mini_oven">Мини-печь</string>
+    <string name="monitor">Монитор</string>
+    <string name="range">Газовая плита</string>
+    <string name="refrigerator">Холодильник</string>
+    <string name="small_household_appliance">Тефаль</string>
+    <string name="tv">Телевизор</string>
+    <string name="vacuum_cleaner">Пылесос</string>
+    <string name="washing_machine">Стиральная машина</string>
+    <string name="calculator_fragment_label">Калькулятор</string>
+    <string name="main_menu_fragment_title">Каталог товаров</string>
+    <string name="calculator_fragment_title">Калькулятор продукта</string>
 </resources>

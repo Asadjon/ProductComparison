@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="product_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="cardBackgroundColor">@color/product_item</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">3dp</item>
+    </style>
+
+    <style name="product_item_text_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/pale_black</item>
+    </style>
+
+    <style name="product_item_image_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+</resources>

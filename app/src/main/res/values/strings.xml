@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">Product Comparison</string>
-    <string name="main_fragment_label">Main Fragment</string>
+    <string name="main_fragment_label">Select product</string>
+    <string name="air_conditioner">Air conditioner</string>
+    <string name="built_in_oven">Oven</string>
+    <string name="dishwasher">Dishwasher</string>
+    <string name="freezer">Freezer</string>
+    <string name="kitchen_hood">Kitchen hood</string>
+    <string name="microwave">Microwave</string>
+    <string name="mini_oven">Mini oven</string>
+    <string name="monitor">Monitor</string>
+    <string name="range">Kitchen Range</string>
+    <string name="refrigerator">Refrigerator</string>
+    <string name="small_household_appliance">Tefal</string>
+    <string name="tv">Televisor</string>
+    <string name="vacuum_cleaner">Vacuum cleaner</string>
+    <string name="washing_machine">Washing machine</string>
+    <string name="calculator_fragment_label">Calculator</string>
+    <string name="main_menu_fragment_title">Product catalog</string>
+    <string name="calculator_fragment_title">Product calculator</string>
 </resources>

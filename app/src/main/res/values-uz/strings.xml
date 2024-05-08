@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Mahsulotni taqqoslash</string>
-    <string name="main_fragment_label">Main Fragment</string>
+    <string name="main_fragment_label">Mahsulotni tanlang</string>
+    <string name="air_conditioner">Konditsioner</string>
+    <string name="built_in_oven">Pech</string>
+    <string name="dishwasher">Idish yuvish mashinasi</string>
+    <string name="freezer">Muzlatgich</string>
+    <string name="kitchen_hood">Dudbo\'ron</string>
+    <string name="microwave">Mikroto\'lqinli pech</string>
+    <string name="mini_oven">Mini pech</string>
+    <string name="monitor">Monitor</string>
+    <string name="range">Gaz plitasi</string>
+    <string name="refrigerator">Muzlatgich</string>
+    <string name="small_household_appliance">Tefal</string>
+    <string name="tv">Televizor</string>
+    <string name="vacuum_cleaner">Chang yutgich</string>
+    <string name="washing_machine">Kir yuvish mashinasi</string>
+    <string name="calculator_fragment_label">Kalkulyator</string>
+    <string name="main_menu_fragment_title">Mahsulotlar ro\'yxati</string>
+    <string name="calculator_fragment_title">Mahsulot kalkulyatori</string>
 </resources>

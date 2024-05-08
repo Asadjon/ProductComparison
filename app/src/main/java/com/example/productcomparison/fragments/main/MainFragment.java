@@ -1,7 +1,5 @@
 package com.example.productcomparison.fragments.main;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.productcomparison.adapters.SelectProductAdapter;
 import com.example.productcomparison.databinding.FragmentMainBinding;
 
 public class MainFragment extends Fragment {
@@ -29,6 +28,13 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel = MainViewModel.getInstance(this, getResources());
+
+        viewModel.getProductListLD().observe(getViewLifecycleOwner(), products ->
+                binding.setAdapter(new SelectProductAdapter(products, this::onClickItem)));
+    }
+
+    private void onClickItem(int index) {
+        System.out.println(index);
     }
 }

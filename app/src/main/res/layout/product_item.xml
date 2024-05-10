@@ -5,7 +5,7 @@
     <data>
         <variable
             name="product"
-            type="com.example.productcomparison.models.Product" />
+            type="com.cyberpantera.productcomparison.models.Product" />
     </data>
 
     <androidx.cardview.widget.CardView style="@style/product_item">

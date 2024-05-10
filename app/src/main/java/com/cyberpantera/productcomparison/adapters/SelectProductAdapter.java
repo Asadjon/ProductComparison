@@ -1,4 +1,4 @@
-package com.example.productcomparison.adapters;
+package com.cyberpantera.productcomparison.adapters;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.productcomparison.databinding.ProductItemBinding;
-import com.example.productcomparison.models.Product;
+import com.cyberpantera.productcomparison.databinding.ProductItemBinding;
+import com.cyberpantera.productcomparison.models.Product;
 
 import java.util.List;
 

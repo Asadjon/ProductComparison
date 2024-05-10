@@ -1,0 +1,275 @@
+[
+  {
+    "name": "Artel",
+    "diagonal_size": {
+      "stated_values": 32,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "Google tv",
+      "actual_values": "Google tv"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "HD 1366 x 768",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "Google Assistant",
+      "actual_values": "yes"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "yes"
+    },
+    "ram": {
+      "stated_values": "1.5 GB",
+      "actual_values": "1.5 GB"
+    },
+    "flash_memory": {
+      "stated_values": "16 GB",
+      "actual_values": "16 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 45,
+      "actual_values": 45
+    }
+  },
+  {
+    "name": "Mytech",
+    "diagonal_size": {
+      "stated_values": 32,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "android tv",
+      "actual_values": "AOSP"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "8K 7680*4320",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "Google Assistant",
+      "actual_values": "does_not_work"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "yes"
+    },
+    "ram": {
+      "stated_values": "1 GB",
+      "actual_values": "1 GB"
+    },
+    "flash_memory": {
+      "stated_values": "8 GB",
+      "actual_values": "8 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 30,
+      "actual_values": 37
+    }
+  },
+  {
+    "name": "WIFI TV",
+    "diagonal_size": {
+      "stated_values": 35,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "Non smart WiFi tv",
+      "actual_values": "Non smart WiFi tv"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "NEO QLED",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "does_not_work"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "yes"
+    },
+    "ram": {
+      "stated_values": "not_specified",
+      "actual_values": "no_data"
+    },
+    "flash_memory": {
+      "stated_values": "not_specified",
+      "actual_values": "no_data"
+    },
+    "energy_consumption": {
+      "stated_values": 45,
+      "actual_values": 40
+    }
+  },
+  {
+    "name": "Samsung",
+    "diagonal_size": {
+      "stated_values": 32,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "Smart tv",
+      "actual_values": "AOSP"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "HD 1366 x 768",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "AOSP Помощник ",
+      "actual_values": "yes"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "yes"
+    },
+    "ram": {
+      "stated_values": "1 GB",
+      "actual_values": "1 GB"
+    },
+    "flash_memory": {
+      "stated_values": "8 GB",
+      "actual_values": "8 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 60,
+      "actual_values": 40
+    }
+  },
+  {
+    "name": "Samsung MAX",
+    "diagonal_size": {
+      "stated_values": 35,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "android tv",
+      "actual_values": "AOSP"
+    },
+    "os_version": {
+      "stated_values": "Android 11",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "HD 1366 x 768",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "no",
+      "actual_values": "no"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "not_specified",
+      "actual_values": "no"
+    },
+    "ram": {
+      "stated_values": "1 GB",
+      "actual_values": "1 GB"
+    },
+    "flash_memory": {
+      "stated_values": "8 GB",
+      "actual_values": "8 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 45,
+      "actual_values": 42
+    }
+  },
+  {
+    "name": "Yasin",
+    "diagonal_size": {
+      "stated_values": 32,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "android tv",
+      "actual_values": "AOSP"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "FHD 1920 x 1080",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "Google Assistant",
+      "actual_values": "does_not_work"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "yes",
+      "actual_values": "no"
+    },
+    "ram": {
+      "stated_values": "1 GB",
+      "actual_values": "1 GB"
+    },
+    "flash_memory": {
+      "stated_values": "8 GB",
+      "actual_values": "8 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 45,
+      "actual_values": 41
+    }
+  },
+  {
+    "name": "Moonx",
+    "diagonal_size": {
+      "stated_values": 32,
+      "actual_values": 32
+    },
+    "os_type": {
+      "stated_values": "android tv",
+      "actual_values": "AOSP"
+    },
+    "os_version": {
+      "stated_values": "not_specified",
+      "actual_values": "Android 11"
+    },
+    "screen_resolution": {
+      "stated_values": "HD 1366 x 768",
+      "actual_values": "HD 1366 x 768"
+    },
+    "voice_control": {
+      "stated_values": "Google Assistant",
+      "actual_values": "does_not_work"
+    },
+    "remote_control_voice_control": {
+      "stated_values": "yes",
+      "actual_values": "no"
+    },
+    "ram": {
+      "stated_values": "1 GB",
+      "actual_values": "1 GB"
+    },
+    "flash_memory": {
+      "stated_values": "8 GB",
+      "actual_values": "8 GB"
+    },
+    "energy_consumption": {
+      "stated_values": 50,
+      "actual_values": 40
+    }
+  }
+]

@@ -18,4 +18,6 @@
     <string name="calculator_fragment_label">Calculator</string>
     <string name="main_menu_fragment_title">Product catalog</string>
     <string name="calculator_fragment_title">Product calculator</string>
+    <string name="fragment_select_model">Select models</string>
+    <string name="model_text">Model</string>
 </resources>

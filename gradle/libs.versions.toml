@@ -1,12 +1,14 @@
 [versions]
 agp = "8.3.2"
+circularimageview = "4.3.1"
+gson = "2.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
 lombok = "1.18.32"
-material = "1.11.0"
-activity = "1.8.0"
+material = "1.12.0"
+activity = "1.9.0"
 constraintlayout = "2.1.4"
 navigationFragment = "2.7.7"
 legacySupportV4 = "1.0.0"
@@ -14,6 +16,8 @@ lifecycleLivedataKtx = "2.7.0"
 lifecycleViewmodelKtx = "2.7.0"
 
 [libraries]
+circularimageview = { module = "com.mikhaellopez:circularimageview", version.ref = "circularimageview" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

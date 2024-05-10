@@ -19,4 +19,6 @@
     <string name="calculator_fragment_label">Kalkulyator</string>
     <string name="main_menu_fragment_title">Mahsulotlar ro\'yxati</string>
     <string name="calculator_fragment_title">Mahsulot kalkulyatori</string>
+    <string name="fragment_select_model">Modellarni tanlang</string>
+    <string name="model_text">Model</string>
 </resources>

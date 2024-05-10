@@ -1,0 +1,73 @@
+[
+  {
+    "name": "TV",
+    "string_index": 0,
+    "drawable": "products/tv.png",
+    "data": "products/tv.json"
+  },
+  {
+    "name": "Air conditioner",
+    "string_index": 1,
+    "drawable": "products/air_conditioner.png"
+  },
+  {
+    "name": "Oven",
+    "string_index": 2,
+    "drawable": "products/built_in_oven.png"
+  },
+  {
+    "name": "Dishwasher",
+    "string_index": 3,
+    "drawable": "products/dishwasher.jpg"
+  },
+  {
+    "name": "Freezer",
+    "string_index": 4,
+    "drawable": "products/freezer.jpg"
+  },
+  {
+    "name": "Kitchen hood",
+    "string_index": 5,
+    "drawable": "products/kitchen_hood.jpg"
+  },
+  {
+    "name": "Microwave",
+    "string_index": 6,
+    "drawable": "products/microwave.png"
+  },
+  {
+    "name": "Mini oven",
+    "string_index": 7,
+    "drawable": "products/mini_oven.jpg"
+  },
+  {
+    "name": "Monitor",
+    "string_index": 8,
+    "drawable": "products/monitor.png"
+  },
+  {
+    "name": "Kitchen Range",
+    "string_index": 9,
+    "drawable": "products/range.jpg"
+  },
+  {
+    "name": "Refrigerator",
+    "string_index": 10,
+    "drawable": "products/refrigerator.jpg"
+  },
+  {
+    "name": "Tefal",
+    "string_index": 11,
+    "drawable": "products/small_household_appliance.jpg"
+  },
+  {
+    "name": "Vacuum cleaner",
+    "string_index": 12,
+    "drawable": "products/vacuum_cleaner.png"
+  },
+  {
+    "name": "Washing machine",
+    "string_index": 13,
+    "drawable": "products/washing_machine.png"
+  }
+]

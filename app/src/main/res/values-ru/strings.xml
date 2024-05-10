@@ -19,4 +19,6 @@
     <string name="calculator_fragment_label">Калькулятор</string>
     <string name="main_menu_fragment_title">Каталог товаров</string>
     <string name="calculator_fragment_title">Калькулятор продукта</string>
+    <string name="fragment_select_model">Выберите модели</string>
+    <string name="model_text">Модель</string>
 </resources>

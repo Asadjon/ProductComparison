@@ -1,4 +1,4 @@
-package com.example.productcomparison;
+package com.cyberpantera.productcomparison;
 
 import android.os.Bundle;
 
@@ -8,15 +8,18 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.productcomparison.databinding.ActivityMainBinding;
+import com.cyberpantera.productcomparison.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
+    private MainActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = MainActivityViewModel.getInstance(this);
 
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

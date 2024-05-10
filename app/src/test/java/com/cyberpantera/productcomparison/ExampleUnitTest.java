@@ -1,4 +1,4 @@
-package com.example.productcomparison;
+package com.cyberpantera.productcomparison;
 
 import org.junit.Test;
 

@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer-array name="artel_product_catalog">
-        <item>@drawable/tv</item>
-        <item>@drawable/air_conditioner</item>
-        <item>@drawable/built_in_oven</item>
-        <item>@drawable/dishwasher</item>
-        <item>@drawable/freezer</item>
-        <item>@drawable/kitchen_hood</item>
-        <item>@drawable/microwave</item>
-        <item>@drawable/mini_oven</item>
-        <item>@drawable/monitor</item>
-        <item>@drawable/range</item>
-        <item>@drawable/refrigerator</item>
-        <item>@drawable/small_household_appliance</item>
-        <item>@drawable/vacuum_cleaner</item>
-        <item>@drawable/washing_machine</item>
-    </integer-array>
-
     <integer-array name="artel_product_catalog_name">
         <item>@string/tv</item>
         <item>@string/air_conditioner</item>

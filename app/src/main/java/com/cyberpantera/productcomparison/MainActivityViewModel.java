@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.cyberpantera.productcomparison.models.Comparables;
 import com.cyberpantera.productcomparison.models.Data;
 import com.cyberpantera.productcomparison.models.Product;
 import com.cyberpantera.productcomparison.models.ProductData;
@@ -30,42 +31,89 @@ public class MainActivityViewModel extends ViewModel {
     private final AssetManager assetManager;
     private final Resources resources;
     @Getter
-    private final List<Product> productList = new ArrayList<>();
-    private final MutableLiveData<List<Product>> productListLiveData = new MutableLiveData<>();
+    private final List<Product<Data>> productList = new ArrayList<>();
+    private final MutableLiveData<List<Product<Data>>> productListLiveData = new MutableLiveData<>();
 
-    public LiveData<List<Product>> getProductListLD() {
+    public LiveData<List<Product<Data>>> getProductListLD() {
         return productListLiveData;
+    }
+
+    private final MutableLiveData<Product<Data>> comparableProduct = new MutableLiveData<>();
+
+    public LiveData<Product<Data>> getComparableProductLiveData() {
+        return comparableProduct;
+    }
+
+    public Product<Data> getComparableProduct() {
+        return comparableProduct.getValue();
+    }
+
+    public void setComparableProductIndex(int index) {
+        comparableProduct.setValue(productList.get(index));
+    }
+
+    private final MutableLiveData<Comparables> comparables = new MutableLiveData<>();
+
+    public LiveData<Comparables> getComparablesLiveData() {
+        return comparables;
+    }
+
+    public Comparables getComparables() {
+        return comparables.getValue();
+    }
+
+    public void setComparables(Data model_1, Data model_2) {
+        Comparables c = getComparables();
+        if (c == null) c = new Comparables();
+        c.setModel_1(model_1);
+        c.setModel_2(model_2);
+        comparables.setValue(c);
     }
 
     private MainActivityViewModel(AssetManager assetManager, Resources resources) {
         this.assetManager = assetManager;
         this.resources = resources;
+
         this.productListLiveData.observeForever(products -> {
             productList.clear();
             productList.addAll(products);
         });
+
+        this.comparableProduct.observeForever(product -> {
+            List<Data> dataList = product.getDataList();
+            Comparables comparables = getComparables();
+            if (comparables == null || !dataList.contains(comparables.getModel_1()))
+                setComparables(dataList.get(0), dataList.get(1));
+        });
+
         loadData();
     }
 
     private void loadData() {
-        String productsJsonData = getJson(openFile("products.json"));
+        String productsJsonData = getJson("products.json");
         Gson gson = new Gson();
-        List<ProductData> productDataList = gson.fromJson(productsJsonData, new TypeToken<ArrayList<ProductData>>() {}.getType());
+        List<ProductData> productDataList = gson.fromJson(productsJsonData, new TypeToken<ArrayList<ProductData>>() {
+        }.getType());
 
         productListLiveData.setValue(productDataList.stream().map(this::getProduct).collect(Collectors.toList()));
     }
 
-    private Product getProduct(ProductData productData) {
-        String[] nameIdes = resources.getStringArray(R.array.artel_product_catalog_name);
-        List<Data> dataList = productData.getDataPath() == null ? new ArrayList<>()
-                : new Gson().fromJson(getJson(openFile(productData.getDataPath())), new TypeToken<ArrayList<Data>>() {}.getType());
-        return new Product(
+    private Product<Data> getProduct(ProductData productData) {
+        String[] nameIdes = resources.getStringArray(R.array.product_catalog_name);
+        ProductData.Data data = productData.getData();
+
+        List<Data> dataList = data == null ? new ArrayList<Data>()
+                : new Gson().fromJson(getJson(data.getPath()), TypeToken.getParameterized(ArrayList.class, data.getDataType()).getType());
+        return new Product<>(
                 nameIdes[productData.getStringIndex()],
                 Drawable.createFromStream(openFile(productData.getDrawablePath()), null),
                 dataList);
     }
 
-    private String getJson(InputStream data) {
+    private String getJson(String path) {
+        // Open file
+        InputStream data = openFile(path);
+
         // Read the JSON data as a string
         try {
             byte[] buffer = new byte[data.available()];

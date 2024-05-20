@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Сравнение продуктов</string>
     <string name="main_fragment_label">Выберите продукт</string>
+    <string name="select_model_fragment_label">Выберите модели</string>
+    <string name="compare_fragment_label">Сравнение продуктов</string>
     <string name="air_conditioner">Кондиционер</string>
     <string name="built_in_oven">Печь</string>
     <string name="dishwasher">Посудомоечная машина</string>
@@ -16,9 +18,29 @@
     <string name="tv">Телевизор</string>
     <string name="vacuum_cleaner">Пылесос</string>
     <string name="washing_machine">Стиральная машина</string>
-    <string name="calculator_fragment_label">Калькулятор</string>
     <string name="main_menu_fragment_title">Каталог товаров</string>
     <string name="calculator_fragment_title">Калькулятор продукта</string>
-    <string name="fragment_select_model">Выберите модели</string>
     <string name="model_text">Модель</string>
+    <string name="model_name">Имя</string>
+    <string name="characteristics">Характеристики</string>
+    <string name="stated">Заявленный</string>
+    <string name="actually">Фактически</string>
+    <string-array name="tv_data">
+        <item>Размер по диагонали</item>
+        <item>Тип OS</item>
+        <item>Версия OS</item>
+        <item>Разрешение экрана</item>
+        <item>Голосовое управление</item>
+        <item>Кнопка голосового управления на пульте</item>
+        <item>Оперативная память</item>
+        <item>Флеш память</item>
+        <item>Максимальное энергопотребление</item>
+    </string-array>
+    <string-array name="about_names">
+        <item>Нет данных</item>
+        <item>Не указан</item>
+        <item>Не работает</item>
+        <item>Есть</item>
+        <item>Нет</item>
+    </string-array>
 </resources>

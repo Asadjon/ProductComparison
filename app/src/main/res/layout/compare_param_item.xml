@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.cyberpantera.productcomparison.fragments.compare.CompareViewModel" />
+        <variable
+            name="index"
+            type="Integer" />
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:showIn="@layout/fragment_compare">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="@{viewModel.getParametersName()[index]}"
+            style="@style/compare_param.name" />
+
+        <TextView
+            android:text="@{viewModel.getParameter(index).getProduct(0).getValue(0)}"
+            style="@style/compare_param.value"/>
+
+        <TextView
+            android:text="@{viewModel.getParameter(index).getProduct(0).getValue(1)}"
+            style="@style/compare_param.value"/>
+
+        <TextView
+            android:text="@{viewModel.getParameter(index).getProduct(1).getValue(0)}"
+            style="@style/compare_param.value"/>
+
+        <TextView
+            android:text="@{viewModel.getParameter(index).getProduct(1).getValue(1)}"
+            style="@style/compare_param.value" />
+
+    </LinearLayout>
+
+</layout>

@@ -15,35 +15,22 @@
         android:layout_height="match_parent"
         tools:context=".fragments.select_model.SelectModelFragment">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/image_view_bottom"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.4"/>
+            android:orientation="vertical"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <com.mikhaellopez.circularimageview.CircularImageView
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:src="@{viewModel.productLiveData.src}"
-            app:civ_border_color="@color/teal_200"
-            app:civ_border_width="4dp"
-            app:civ_shadow="true"
-            app:civ_shadow_color="@color/teal_700"
-            app:civ_shadow_radius="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/image_view_bottom"/>
+            <com.mikhaellopez.circularimageview.CircularImageView
+                style="@style/select_model.image"
+                android:src="@{viewModel.productLiveData.src}"/>
 
-        <TextView
-            android:id="@+id/text_view"
-            style="@style/product_item_text_style"
-            app:layout_constraintTop_toBottomOf="@id/image_view_bottom"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:text="@{viewModel.productLiveData.name}"
-            android:textSize="25sp"/>
+            <TextView
+                style="@style/select_model.product_name"
+                android:text="@{viewModel.productLiveData.name}" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -52,33 +39,28 @@
             android:layout_marginBottom="70dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintWidth_percent=".95">
 
             <NumberPicker
-                android:id="@+id/model_picker_1"
-                android:onValueChange="@{() -> viewModel.onValueChange()}"
-                style="@style/select_model_number_picker"
-                android:theme="@style/select_model_number_picker" />
+                app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
+                app:value="@{viewModel.getValueOfNumPicker(0)}"
+                app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(0)}"
+                style="@style/select_model.number_picker"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="20dp"
-                android:background="@android:color/transparent"
-                android:backgroundTint="@color/teal_200"
-                android:contentDescription="Compare"
+                app:enabled="@{viewModel.compareButtonEnabledLiveData}"
                 android:src="@drawable/baseline_compare_arrows_24"
                 android:onClick="@{() -> viewModel.onClickCompare()}"
-                android:enabled="@{viewModel.compareButtonEnabledLiveData}"/>
+                style="@style/select_model.compare_button" />
 
             <NumberPicker
-                android:id="@+id/model_picker_2"
-                android:onValueChange="@{() -> viewModel.onValueChange()}"
-                style="@style/select_model_number_picker"
-                android:theme="@style/select_model_number_picker"/>
+                app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
+                app:value="@{viewModel.getValueOfNumPicker(1)}"
+                app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(1)}"
+                style="@style/select_model.number_picker"/>
 
         </LinearLayout>
 

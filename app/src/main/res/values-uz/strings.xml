@@ -2,6 +2,8 @@
 <resources>
     <string name="app_name">Mahsulotni taqqoslash</string>
     <string name="main_fragment_label">Mahsulotni tanlang</string>
+    <string name="select_model_fragment_label">Modellarni tanlang</string>
+    <string name="compare_fragment_label">Maxsulotni taqqoslash</string>
     <string name="air_conditioner">Konditsioner</string>
     <string name="built_in_oven">Pech</string>
     <string name="dishwasher">Idish yuvish mashinasi</string>
@@ -16,9 +18,29 @@
     <string name="tv">Televizor</string>
     <string name="vacuum_cleaner">Chang yutgich</string>
     <string name="washing_machine">Kir yuvish mashinasi</string>
-    <string name="calculator_fragment_label">Kalkulyator</string>
     <string name="main_menu_fragment_title">Mahsulotlar ro\'yxati</string>
     <string name="calculator_fragment_title">Mahsulot kalkulyatori</string>
-    <string name="fragment_select_model">Modellarni tanlang</string>
     <string name="model_text">Model</string>
+    <string name="model_name">Nomi</string>
+    <string name="characteristics">Xususiyatlari</string>
+    <string name="stated">Belgilangan</string>
+    <string name="actually">Aslida</string>
+    <string-array name="tv_data">
+        <item>Diagonal o‘lcham</item>
+        <item>OS turi</item>
+        <item>OS versiyasi</item>
+        <item>Screen resolution</item>
+        <item>Ekran o‘lchami</item>
+        <item>Pult ovozli boshqaruv</item>
+        <item>RAM</item>
+        <item>Flash xotira</item>
+        <item>Energiya iste‘moli</item>
+    </string-array>
+    <string-array name="about_names">
+        <item>Ma‘lumot yo‘q</item>
+        <item>Ko‘rsatilmagan</item>
+        <item>Ishlamaydi</item>
+        <item>Mavjud</item>
+        <item>Yo‘q</item>
+    </string-array>
 </resources>

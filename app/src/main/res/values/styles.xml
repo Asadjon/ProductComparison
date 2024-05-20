@@ -27,15 +27,88 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
-    <style name="select_model_number_picker" parent="Theme.AppCompat.Light">
-        <item name="colorAccent">@color/white</item>
-        <item name="colorControlNormal">@color/teal_200</item>
-        <item name="android:textColorPrimary">@color/black</item>
+    <style name="compare_param">
+        <item name="android:gravity">center_vertical|start</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:foreground">@drawable/rectangle</item>
+    </style>
+
+    <style name="compare_param.name">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="theme">@style/Compare_Param.Name</item>
+        <item name="android:textAppearance">@style/Compare_Param.Name</item>
+    </style>
+
+    <style name="compare_param.value">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:layout_weight">0.7</item>
+        <item name="theme">@style/Compare_Param.Value</item>
+        <item name="android:textAppearance">@style/Compare_Param.Value</item>
+    </style>
+
+    <style name="compare_param.header_name">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.7</item>
+        <item name="android:textAlignment">center</item>
+        <item name="theme">@style/Compare_Param.Header</item>
+        <item name="android:textAppearance">@style/Compare_Param.Header</item>
+    </style>
+
+    <style name="select_model">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="select_model.product_name">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">0.15</item>
+        <item name="autoSizeTextType">uniform</item>
+        <item name="theme">@style/SelectModel.ProductName</item>
+    </style>
+
+    <style name="select_model.image">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="civ_border_color">?attr/colorAccent</item>
+        <item name="civ_border_width">4dp</item>
+        <item name="civ_shadow">true</item>
+        <item name="civ_shadow_color">@color/shadow</item>
+        <item name="civ_shadow_radius">10dp</item>
+    </style>
+
+    <style name="select_model.number_picker">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_gravity">center_vertical|end</item>
         <item name="android:descendantFocusability">blocksDescendants</item>
+        <item name="android:theme">@style/SelectModel.NumberPicker</item>
+        <item name="minValue">0</item>
+    </style>
+
+    <style name="select_model.compare_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:contentDescription">Compare</item>
     </style>
 
 </resources>

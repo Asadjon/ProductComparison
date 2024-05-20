@@ -17,11 +17,23 @@
     <fragment
         android:id="@+id/SelectModelFragment"
         android:name="com.cyberpantera.productcomparison.fragments.select_model.SelectModelFragment"
-        android:label="@string/fragment_select_model"
+        android:label="@string/select_model_fragment_label"
         tools:layout="@layout/fragment_select_model" >
         <action
             android:id="@+id/action_SelectModelFragment_to_MainFragment"
             app:destination="@id/MainFragment" />
+        <action
+            android:id="@+id/action_SelectModelFragment_to_CompareFragment"
+            app:destination="@id/CompareFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/CompareFragment"
+        android:name="com.cyberpantera.productcomparison.fragments.compare.CompareFragment"
+        android:label="@string/compare_fragment_label"
+        tools:layout="@layout/fragment_compare">
+        <action
+            android:id="@+id/action_CompareFragment_to_SelectModelFragment"
+            app:destination="@id/SelectModelFragment" />
     </fragment>
 
 </navigation>

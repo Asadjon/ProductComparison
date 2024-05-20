@@ -1,7 +1,5 @@
 package com.cyberpantera.productcomparison.fragments.main;
 
-import static com.cyberpantera.productcomparison.fragments.select_model.SelectModelFragment.PRODUCT_INDEX;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -41,7 +39,7 @@ public class MainFragment extends Fragment {
     }
 
     private void onClickItem(int index) {
-        requireActivity().getIntent().putExtra(PRODUCT_INDEX, 0);
+        mainActivityVM.setComparableProductIndex(0);
 
         NavHostFragment.findNavController(MainFragment.this)
                 .navigate(R.id.action_MainFragment_to_SelectModelFragment);

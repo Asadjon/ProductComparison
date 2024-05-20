@@ -1,6 +1,6 @@
 [
   {
-    "name": "Artel",
+    "name": "Artel TV 32",
     "diagonal_size": {
       "stated_values": 32,
       "actual_values": 32
@@ -39,7 +39,7 @@
     }
   },
   {
-    "name": "Mytech",
+    "name": "Mytech TV 32",
     "diagonal_size": {
       "stated_values": 32,
       "actual_values": 32
@@ -78,7 +78,7 @@
     }
   },
   {
-    "name": "WIFI TV",
+    "name": "WIFI TV 35",
     "diagonal_size": {
       "stated_values": 35,
       "actual_values": 32
@@ -117,13 +117,13 @@
     }
   },
   {
-    "name": "Samsung",
+    "name": "Samsung (China) TV 32",
     "diagonal_size": {
       "stated_values": 32,
       "actual_values": 32
     },
     "os_type": {
-      "stated_values": "Smart tv",
+      "stated_values": "Smart (China) tv",
       "actual_values": "AOSP"
     },
     "os_version": {
@@ -156,7 +156,7 @@
     }
   },
   {
-    "name": "Samsung MAX",
+    "name": "Samsung TV MAX 35",
     "diagonal_size": {
       "stated_values": 35,
       "actual_values": 32
@@ -195,7 +195,7 @@
     }
   },
   {
-    "name": "Yasin",
+    "name": "Yasin TV 32",
     "diagonal_size": {
       "stated_values": 32,
       "actual_values": 32
@@ -234,7 +234,7 @@
     }
   },
   {
-    "name": "Moonx",
+    "name": "Moonx TV 32",
     "diagonal_size": {
       "stated_values": 32,
       "actual_values": 32

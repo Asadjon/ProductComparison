@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cyberpantera.productcomparison.databinding.ProductItemBinding;
+import com.cyberpantera.productcomparison.models.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdapter.MyViewHolder> {
 
-    private List<Product> products;
+    private List<Product<Data>> products;
     private ItemOnClickListener onClickListener;
     @NonNull
     @Override
@@ -44,7 +45,7 @@ public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdap
             this.binding = binding;
         }
 
-        public void bind(Product product) {
+        public void bind(Product<Data> product) {
             binding.setProduct(product);
             binding.getRoot().setOnClickListener(view -> {
                 if (onClickListener != null)

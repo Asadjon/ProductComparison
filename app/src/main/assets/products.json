@@ -3,7 +3,10 @@
     "name": "TV",
     "string_index": 0,
     "drawable": "products/tv.png",
-    "data": "products/tv.json"
+    "data": {
+      "path": "products/tv.json",
+      "type": "com.cyberpantera.productcomparison.models.TV"
+    }
   },
   {
     "name": "Air conditioner",

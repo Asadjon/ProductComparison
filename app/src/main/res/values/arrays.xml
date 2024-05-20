@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer-array name="artel_product_catalog_name">
+    <integer-array name="product_catalog_name">
         <item>@string/tv</item>
         <item>@string/air_conditioner</item>
         <item>@string/built_in_oven</item>

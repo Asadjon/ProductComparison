@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Product Comparison</string>
     <string name="main_fragment_label">Select product</string>
+    <string name="select_model_fragment_label">Select models</string>
+    <string name="compare_fragment_label">Product comparison</string>
     <string name="air_conditioner">Air conditioner</string>
     <string name="built_in_oven">Oven</string>
     <string name="dishwasher">Dishwasher</string>
@@ -15,9 +17,29 @@
     <string name="tv">Televisor</string>
     <string name="vacuum_cleaner">Vacuum cleaner</string>
     <string name="washing_machine">Washing machine</string>
-    <string name="calculator_fragment_label">Calculator</string>
     <string name="main_menu_fragment_title">Product catalog</string>
     <string name="calculator_fragment_title">Product calculator</string>
-    <string name="fragment_select_model">Select models</string>
     <string name="model_text">Model</string>
+    <string name="model_name">Name</string>
+    <string name="characteristics">Characteristics</string>
+    <string name="stated">Stated</string>
+    <string name="actually">Actually</string>
+    <string-array name="tv_data">
+        <item>Diagonal size</item>
+        <item>OS type</item>
+        <item>OS version</item>
+        <item>Screen resolution</item>
+        <item>Voice control</item>
+        <item>Remote control voice control</item>
+        <item>RAM</item>
+        <item>Flash memory</item>
+        <item>Energy consumption</item>
+    </string-array>
+    <string-array name="about_names">
+        <item>No data</item>
+        <item>Not specified</item>
+        <item>Does not work</item>
+        <item>There is</item>
+        <item>No</item>
+    </string-array>
 </resources>

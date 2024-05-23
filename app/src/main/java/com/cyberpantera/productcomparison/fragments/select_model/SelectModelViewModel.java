@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.cyberpantera.productcomparison.adapters.SelectProductAdapter;
 import com.cyberpantera.productcomparison.models.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
@@ -16,21 +17,54 @@ import java.util.Objects;
 
 public class SelectModelViewModel extends ViewModel {
 
-    private final MutableLiveData<Product<Data>> product = new MutableLiveData<>();
+    private final MutableLiveData<List<Product<Data>>> productList = new MutableLiveData<>();
 
-    public Product<Data> getProduct() {
-        return product.getValue();
+    public LiveData<List<Product<Data>>> getProductListLiveData() {
+        return productList;
     }
 
-    public LiveData<Product<Data>> getProductLiveData() {
-        return product;
+    public List<Product<Data>> getProductList() {
+        return productList.getValue();
     }
 
-    public void setProduct(Product<Data> product) {
-        this.product.setValue(product);
+    public void setProductList(List<Product<Data>> productList) {
+        this.productList.setValue(productList);
     }
 
-    // -----------------------------------------------------------------------------------------------
+    private final MutableLiveData<Product<Data>> selectedProduct = new MutableLiveData<>();
+
+    public LiveData<Product<Data>> getSelectedProductLiveData() {
+        return selectedProduct;
+    }
+
+
+    public Product<Data> getSelectedProduct() {
+        return getProductList().get(0);
+    }
+
+    public void setSelectedProduct(Product<Data> selectedProduct) {
+        this.selectedProduct.setValue(selectedProduct);
+    }
+
+    // ViewPager -----------------------------------------------------------------------------------------------
+
+    private final MutableLiveData<SelectProductAdapter> selectProductAdapter = new MutableLiveData<>();
+
+    public LiveData<SelectProductAdapter> getSelectProductAdapter() {
+        return selectProductAdapter;
+    }
+
+    public void setSelectProductAdapter(SelectProductAdapter adapter) {
+        selectProductAdapter.setValue(adapter);
+    }
+
+    private final MutableLiveData<Integer> selectedProductIndex = new MutableLiveData<>(0);
+
+    public LiveData<Integer> getSelectedProductIndex() {
+        return selectedProductIndex;
+    }
+
+    //Compare FloatActionButton -----------------------------------------------------------------------------------------------
 
     private final MutableLiveData<Boolean> onClickCompare = new MutableLiveData<>();
 
@@ -41,6 +75,7 @@ public class SelectModelViewModel extends ViewModel {
     public void onClickCompare() {
         onClickCompare.setValue(true);
     }
+
     public void onClickCompareComplete() {
         onClickCompare.setValue(false);
     }
@@ -75,8 +110,12 @@ public class SelectModelViewModel extends ViewModel {
         return onValueChangeOfNumPickerList[index];
     }
 
+    public void setValueOfNumPicker(int index, int value) {
+        onValueChangeOfNumPickerList[index].setValue(value);
+    }
+
     public BindingAdapters.OnValueChangeListener getOnValueChangeListenerOfNumPicker(int index) {
-        return (value) -> onValueChangeOfNumPickerList[index].setValue(value);
+        return (value) -> setValueOfNumPicker(index, value);
     }
 
     private final MediatorLiveData<Boolean> onValuesChangeOfNumPickers = new MediatorLiveData<>(true);
@@ -86,7 +125,12 @@ public class SelectModelViewModel extends ViewModel {
     }
 
     public SelectModelViewModel() {
-        product.observeForever(dataProduct -> displayedValuesOfNumPicker.setValue(dataProduct.getModelNameList()));
+        productList.observeForever(products -> setSelectedProduct(products.get(selectedProductIndex.getValue())));
+
+        selectedProduct.observeForever(dataProduct -> {
+            displayedValuesOfNumPicker.setValue(getSelectedProduct().getModelNameList());
+            selectedProductIndex.setValue(getProductList().indexOf(dataProduct));
+        });
         displayedValuesOfNumPicker.observeForever(strings -> maxValueOfNumPicker.setValue(strings.size() - 1));
 
         valuesOfNumPicker[0] = new MutableLiveData<>();

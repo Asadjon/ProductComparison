@@ -1,5 +1,7 @@
 package com.cyberpantera.productcomparison.models;
 
+import androidx.annotation.Size;
+
 import com.cyberpantera.productcomparison.App;
 import com.cyberpantera.productcomparison.R;
 
@@ -9,48 +11,31 @@ import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode
+@Getter
 public class ParameterRow {
-    @Getter
-    private final String param;
-    private final Param[] products = new Param[2];
+    private final String name;
+    private final Param[] products;
 
-    public ParameterRow(String param, Param product1, Param product2) {
-        this.param = param;
-        products[0] = product1;
-        products[1] = product2;
-    }
-
-    public Param getProduct(int index) {
-        return  products[index];
+    public ParameterRow(String name, @Size(min = 1, max = 2, value = 2) Param... products) {
+        this.name = name;
+        this.products = products;
     }
 
     @ToString
     @EqualsAndHashCode
+    @Getter
     public static final class Param {
-        private final String[] values = new String[2];
+        private final String[] values;
 
-        public Param(String val1, String val2) {
-            values[0] = val1;
-            values[1] = val2;
+        public Param(@Size(min = 1, max = 2, value = 2) String... values) {
+            this.values = values;
 
             String[] aboutsName = App.getInstance().getResources().getStringArray(R.array.about_names);
 
             for (int i = 0; i < 2; i++) {
-                Data.About about = Data.About.about(values[i]);
-                values[i] = about != null ? aboutsName[about.getOrder()] : values[i];
+                Data.About about = Data.About.about(this.values[i]);
+                this.values[i] = about != null ? aboutsName[about.getOrder()] : this.values[i];
             }
-        }
-
-        public String getValue(int index) {
-            return  values[index];
-        }
-
-        public Data.About getAbout(int index) {
-            return Data.About.about(getValue(index));
-        }
-
-        public boolean isHaveAbout(int index) {
-            return getAbout(index) != null;
         }
     }
 }

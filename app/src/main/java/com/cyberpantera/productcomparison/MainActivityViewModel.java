@@ -29,7 +29,6 @@ import lombok.NonNull;
 public class MainActivityViewModel extends ViewModel {
 
     private final AssetManager assetManager;
-    private final Resources resources;
     @Getter
     private final List<Product<Data>> productList = new ArrayList<>();
     private final MutableLiveData<List<Product<Data>>> productListLiveData = new MutableLiveData<>();
@@ -48,8 +47,8 @@ public class MainActivityViewModel extends ViewModel {
         return comparableProduct.getValue();
     }
 
-    public void setComparableProductIndex(int index) {
-        comparableProduct.setValue(productList.get(index));
+    public void setComparableProduct(Product<Data> product) {
+        comparableProduct.setValue(product);
     }
 
     private final MutableLiveData<Comparables> comparables = new MutableLiveData<>();
@@ -70,9 +69,8 @@ public class MainActivityViewModel extends ViewModel {
         comparables.setValue(c);
     }
 
-    private MainActivityViewModel(AssetManager assetManager, Resources resources) {
+    private MainActivityViewModel(AssetManager assetManager) {
         this.assetManager = assetManager;
-        this.resources = resources;
 
         this.productListLiveData.observeForever(products -> {
             productList.clear();
@@ -82,7 +80,7 @@ public class MainActivityViewModel extends ViewModel {
         this.comparableProduct.observeForever(product -> {
             List<Data> dataList = product.getDataList();
             Comparables comparables = getComparables();
-            if (comparables == null || !dataList.contains(comparables.getModel_1()))
+            if (comparables == null || !dataList.isEmpty())
                 setComparables(dataList.get(0), dataList.get(1));
         });
 
@@ -99,13 +97,13 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     private Product<Data> getProduct(ProductData productData) {
-        String[] nameIdes = resources.getStringArray(R.array.product_catalog_name);
         ProductData.Data data = productData.getData();
 
-        List<Data> dataList = data == null ? new ArrayList<Data>()
+        List<Data> dataList = data == null ? new ArrayList<>()
                 : new Gson().fromJson(getJson(data.getPath()), TypeToken.getParameterized(ArrayList.class, data.getDataType()).getType());
         return new Product<>(
-                nameIdes[productData.getStringIndex()],
+                productData.getName(),
+                productData.getStringIndex(),
                 Drawable.createFromStream(openFile(productData.getDrawablePath()), null),
                 dataList);
     }
@@ -138,7 +136,7 @@ public class MainActivityViewModel extends ViewModel {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@androidx.annotation.NonNull Class<T> modelClass) {
-                return (T) new MainActivityViewModel(activity.getAssets(), activity.getResources());
+                return (T) new MainActivityViewModel(activity.getAssets());
             }
         }).get(MainActivityViewModel.class);
     }

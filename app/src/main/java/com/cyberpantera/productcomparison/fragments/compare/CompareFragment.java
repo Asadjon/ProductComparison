@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 
 import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
-import com.cyberpantera.productcomparison.adapters.CompareProductAdapter;
 import com.cyberpantera.productcomparison.databinding.FragmentCompareBinding;
 
 public class CompareFragment extends Fragment {
@@ -24,15 +23,18 @@ public class CompareFragment extends Fragment {
             View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
     private int lastOrientation;
 
-    private FragmentCompareBinding binding;
     private MainActivityViewModel mainActivityVM;
     private CompareViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentCompareBinding.inflate(inflater, container, false);
+        viewModel = CompareViewModel.getInstance(this);
+        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
+
+        FragmentCompareBinding binding = FragmentCompareBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
         return binding.getRoot();
     }
 
@@ -46,12 +48,7 @@ public class CompareFragment extends Fragment {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         LifecycleOwner owner = getViewLifecycleOwner();
 
-        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) activity);
-        mainActivityVM.getComparablesLiveData().observe(owner, comparables -> {
-            viewModel = CompareViewModel.getInstance(this, comparables, mainActivityVM.getComparableProduct().getDataParamNames());
-            binding.setViewModel(viewModel);
-            binding.setAdapter(new CompareProductAdapter(viewModel, owner));
-        });
+        mainActivityVM.getComparablesLiveData().observe(owner, viewModel::setComparables);
     }
 
     @Override

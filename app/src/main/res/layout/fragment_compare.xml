@@ -42,12 +42,12 @@
 
                     <TextView
                         android:layout_weight="1"
-                        android:text="@{viewModel.getModelsName()[0]}"
+                        android:text="@{viewModel.comparablesLiveData.model_1.name}"
                         style="@style/compare_param.header_name"/>
 
                     <TextView
                         android:layout_weight="1"
-                        android:text="@{viewModel.getModelsName()[1]}"
+                        android:text="@{viewModel.comparablesLiveData.model_2.name}"
                         style="@style/compare_param.header_name"/>
 
                 </LinearLayout>
@@ -83,7 +83,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adapter="@{adapter}"
+            android:adapter="@{viewModel.adapterLiveData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/compare_param_item" />
 

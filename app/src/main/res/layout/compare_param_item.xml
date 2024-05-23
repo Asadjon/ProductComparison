@@ -4,12 +4,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.cyberpantera.productcomparison.fragments.compare.CompareViewModel" />
-        <variable
-            name="index"
-            type="Integer" />
-        <import type="android.view.View"/>
+            name="parameter"
+            type="com.cyberpantera.productcomparison.models.ParameterRow" />
     </data>
 
     <LinearLayout
@@ -20,23 +16,23 @@
 
         <TextView
             android:layout_weight="1"
-            android:text="@{viewModel.getParametersName()[index]}"
+            android:text="@{parameter.name}"
             style="@style/compare_param.name" />
 
         <TextView
-            android:text="@{viewModel.getParameter(index).getProduct(0).getValue(0)}"
+            android:text="@{parameter.products[0].values[0]}"
             style="@style/compare_param.value"/>
 
         <TextView
-            android:text="@{viewModel.getParameter(index).getProduct(0).getValue(1)}"
+            android:text="@{parameter.products[0].values[1]}"
             style="@style/compare_param.value"/>
 
         <TextView
-            android:text="@{viewModel.getParameter(index).getProduct(1).getValue(0)}"
+            android:text="@{parameter.products[1].values[0]}"
             style="@style/compare_param.value"/>
 
         <TextView
-            android:text="@{viewModel.getParameter(index).getProduct(1).getValue(1)}"
+            android:text="@{parameter.products[1].values[1]}"
             style="@style/compare_param.value" />
 
     </LinearLayout>

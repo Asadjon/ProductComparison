@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
 import com.cyberpantera.productcomparison.R;
+import com.cyberpantera.productcomparison.adapters.SelectProductAdapter;
 import com.cyberpantera.productcomparison.databinding.FragmentSelectModelBinding;
 import com.cyberpantera.productcomparison.models.Comparables;
 import com.cyberpantera.productcomparison.models.Data;
@@ -22,15 +23,18 @@ import com.cyberpantera.productcomparison.models.Data;
 import java.util.List;
 
 public class SelectModelFragment extends Fragment {
-    private FragmentSelectModelBinding binding;
     private SelectModelViewModel viewModel;
     private MainActivityViewModel mainActivityVM;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentSelectModelBinding.inflate(inflater, container, false);
+        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
+        viewModel = SelectModelViewModel.getInstance(this);
+
+        FragmentSelectModelBinding binding = FragmentSelectModelBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.setViewModel(viewModel);
         return binding.getRoot();
     }
 
@@ -38,23 +42,25 @@ public class SelectModelFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = SelectModelViewModel.getInstance(this);
-        binding.setViewModel(viewModel);
-        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
-
         LifecycleOwner owner = getViewLifecycleOwner();
 
-        mainActivityVM.getComparableProductLiveData().observe(owner, viewModel::setProduct);
+        mainActivityVM.getProductListLD().observe(owner, products -> viewModel.setProductList(products));
 
         mainActivityVM.getComparablesLiveData().observe(owner, comparables -> {
-            List<Data> dataList = viewModel.getProduct().getDataList();
+            List<Data> dataList = viewModel.getSelectedProduct().getDataList();
             viewModel.setValuesOfNumPickers(dataList.indexOf(comparables.getModel_1()), dataList.indexOf(comparables.getModel_2()));
         });
 
-        Comparables comparables = mainActivityVM.getComparables();
-        List<Data> dataList = mainActivityVM.getComparableProduct().getDataList();
-        viewModel.getOnValueChangeListenerOfNumPicker(0).onValueChange(dataList.indexOf(comparables.getModel_1()));
-        viewModel.getOnValueChangeListenerOfNumPicker(1).onValueChange(dataList.indexOf(comparables.getModel_2()));
+        viewModel.setSelectProductAdapter(new SelectProductAdapter(requireContext(), viewModel, owner));
+
+        viewModel.getSelectedProductLiveData().observe(owner, product -> mainActivityVM.setComparableProduct(viewModel.getSelectedProduct()));
+
+        viewModel.getSelectedProductLiveData().observe(owner, product -> {
+            Comparables comparables = mainActivityVM.getComparables();
+            List<Data> dataList = viewModel.getSelectedProduct().getDataList();
+            viewModel.setValueOfNumPicker(0, dataList.indexOf(comparables.getModel_1()));
+            viewModel.setValueOfNumPicker(1, dataList.indexOf(comparables.getModel_2()));
+        });
 
         viewModel.getOnValueChangeOfNumPicker(0).observe(owner, value ->
                 mainActivityVM.setComparables(getModel(value), mainActivityVM.getComparables().getModel_2()));
@@ -72,6 +78,6 @@ public class SelectModelFragment extends Fragment {
     }
 
     private Data getModel(int index) {
-        return viewModel.getProduct().getDataList().get(index);
+        return viewModel.getSelectedProduct().getDataList().get(index);
     }
 }

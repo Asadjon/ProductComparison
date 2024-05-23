@@ -10,44 +10,37 @@
             type="com.cyberpantera.productcomparison.fragments.select_model.SelectModelViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".fragments.select_model.SelectModelFragment">
+
+        <com.cyberpantera.productcomparison.ui.MyViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:adapter="@{viewModel.selectProductAdapter}"
+            app:selectedItemPosition="@{viewModel.selectedProductIndex}"
+            app:onPageChange="@{viewModel.selectProductAdapter}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
-            app:layout_constraintHeight_percent="0.5"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                style="@style/select_model.image"
-                android:src="@{viewModel.productLiveData.src}"/>
-
-            <TextView
-                style="@style/select_model.product_name"
-                android:text="@{viewModel.productLiveData.name}" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="70dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintWidth_percent=".95">
+            android:layout_weight="1">
 
-            <NumberPicker
-                app:maxValue="@{viewModel.maxValueOfNumPicker}"
-                app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
-                app:value="@{viewModel.getValueOfNumPicker(0)}"
-                app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(0)}"
-                style="@style/select_model.number_picker"/>
+            <androidx.cardview.widget.CardView
+                style="@style/select_model.parent_of_number_picker">
+
+                <NumberPicker
+                    app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                    app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
+                    app:value="@{viewModel.getValueOfNumPicker(0)}"
+                    app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(0)}"
+                    style="@style/select_model.number_picker"/>
+
+            </androidx.cardview.widget.CardView>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 app:enabled="@{viewModel.compareButtonEnabledLiveData}"
@@ -55,14 +48,19 @@
                 android:onClick="@{() -> viewModel.onClickCompare()}"
                 style="@style/select_model.compare_button" />
 
-            <NumberPicker
-                app:maxValue="@{viewModel.maxValueOfNumPicker}"
-                app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
-                app:value="@{viewModel.getValueOfNumPicker(1)}"
-                app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(1)}"
-                style="@style/select_model.number_picker"/>
+            <androidx.cardview.widget.CardView
+                style="@style/select_model.parent_of_number_picker">
+
+                <NumberPicker
+                    app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                    app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
+                    app:value="@{viewModel.getValueOfNumPicker(1)}"
+                    app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(1)}"
+                    style="@style/select_model.number_picker"/>
+
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

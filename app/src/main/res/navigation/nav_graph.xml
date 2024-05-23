@@ -3,25 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/MainFragment">
+    app:startDestination="@id/SelectModelFragment">
 
-    <fragment
-        android:id="@+id/MainFragment"
-        android:name="com.cyberpantera.productcomparison.fragments.main.MainFragment"
-        android:label="@string/main_fragment_label"
-        tools:layout="@layout/fragment_main">
-        <action
-            android:id="@+id/action_MainFragment_to_SelectModelFragment"
-            app:destination="@id/SelectModelFragment" />
-    </fragment>
     <fragment
         android:id="@+id/SelectModelFragment"
         android:name="com.cyberpantera.productcomparison.fragments.select_model.SelectModelFragment"
         android:label="@string/select_model_fragment_label"
         tools:layout="@layout/fragment_select_model" >
-        <action
-            android:id="@+id/action_SelectModelFragment_to_MainFragment"
-            app:destination="@id/MainFragment" />
         <action
             android:id="@+id/action_SelectModelFragment_to_CompareFragment"
             app:destination="@id/CompareFragment" />

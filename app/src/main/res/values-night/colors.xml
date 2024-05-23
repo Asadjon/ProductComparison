@@ -18,7 +18,7 @@
     <color name="black">#FFFFFFFF</color>
     <color name="white">#FF000000</color>
     <color name="pale_black">#CACACA</color>
-    <color name="product_item">#2E2E2E</color>
+    <color name="product_item">#363C4D</color>
     <color name="shadow">#2E2E2E</color>
     <color name="text">#CFCFCF</color>
     <color name="text2">@color/text</color>

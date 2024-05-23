@@ -8,4 +8,9 @@
         <attr name="valueChanged" format="reference" />
         <attr name="enabled" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="MyViewPager">
+        <attr name="selectedItemPosition" format="integer" />
+        <attr name="onPageChange" format="reference" />
+    </declare-styleable>
 </resources>

@@ -1,5 +1,6 @@
 package com.cyberpantera.productcomparison.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -7,17 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.databinding.CompareParamItemBinding;
 import com.cyberpantera.productcomparison.fragments.compare.CompareViewModel;
+import com.cyberpantera.productcomparison.models.ParameterRow;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAdapter.MyViewHolder> {
 
-    private final CompareViewModel viewModel;
-    private final LifecycleOwner owner;
+    private ParameterRow[] parameters = new ParameterRow[0];
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,26 +24,30 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.setIndex(position);
+        holder.binding(parameters[position]);
     }
 
     @Override
     public int getItemCount() {
-        return viewModel.getParametersCount();
+        return parameters.length;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setParameters(ParameterRow[] parameters) {
+        this.parameters = parameters;
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private final CompareParamItemBinding binding;
 
-        public void setIndex(int index) {
-            binding.setIndex(index);
-        }
-
         public MyViewHolder(@NonNull CompareParamItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            this.binding.setViewModel(viewModel);
-            binding.setLifecycleOwner(owner);
+        }
+
+        public void binding(ParameterRow parameter) {
+            this.binding.setParameter(parameter);
         }
     }
 }

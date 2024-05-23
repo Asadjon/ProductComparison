@@ -1,60 +1,71 @@
 package com.cyberpantera.productcomparison.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.cyberpantera.productcomparison.databinding.ProductItemBinding;
+import com.cyberpantera.productcomparison.fragments.select_model.SelectModelViewModel;
 import com.cyberpantera.productcomparison.models.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+public class SelectProductAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 
-@AllArgsConstructor
-@NoArgsConstructor
-public class SelectProductAdapter extends RecyclerView.Adapter<SelectProductAdapter.MyViewHolder> {
+    private final Context context;
+    private final SelectModelViewModel viewModel;
+    private List<Product<Data>> productList = new ArrayList<>();
 
-    private List<Product<Data>> products;
-    private ItemOnClickListener onClickListener;
+    public SelectProductAdapter(Context context, SelectModelViewModel viewModel, LifecycleOwner owner) {
+        this.context = context;
+        this.viewModel = viewModel;
+        this.viewModel.getProductListLiveData().observe(owner, products -> {
+            productList = products;
+            notifyDataSetChanged();
+        });
+    }
+
+    @Override
+    public int getCount() {
+        return productList.size();
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return view == object;
+    }
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(ProductItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        ProductItemBinding binding = ProductItemBinding.inflate((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
+        binding.setProduct(productList.get(position));
+        container.addView(binding.getRoot());
+
+        return binding.getRoot();
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bind(products.get(position));
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((View) object);
     }
 
     @Override
-    public int getItemCount() {
-        return products.size();
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
+
+    @Override
+    public void onPageSelected(int position) {
+        viewModel.setSelectedProduct(productList.get(position));
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        final ProductItemBinding binding;
-
-        public MyViewHolder(@NonNull ProductItemBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
-
-        public void bind(Product<Data> product) {
-            binding.setProduct(product);
-            binding.getRoot().setOnClickListener(view -> {
-                if (onClickListener != null)
-                    onClickListener.onClickItem(products.indexOf(product));
-            });
-        }
-    }
-
-    public interface ItemOnClickListener {
-        void onClickItem(int index);
-    }
+    @Override
+    public void onPageScrollStateChanged(int state) { }
 }

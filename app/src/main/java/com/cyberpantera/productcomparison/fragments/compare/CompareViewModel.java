@@ -6,45 +6,39 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.cyberpantera.productcomparison.adapters.CompareProductAdapter;
 import com.cyberpantera.productcomparison.models.Comparables;
-import com.cyberpantera.productcomparison.models.ParameterRow;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import lombok.Getter;
+import java.util.Objects;
 
 public class CompareViewModel extends ViewModel {
 
-    private final List<MutableLiveData<ParameterRow>> parameters;
+    private final MutableLiveData<Comparables> comparables = new MutableLiveData<>();
 
-    public LiveData<ParameterRow> getParameter(int index) {
-        return parameters.get(index);
+    public LiveData<Comparables> getComparablesLiveData() {
+        return comparables;
     }
 
-    public int getParametersCount() {
-        return parameters.size();
+    public void setComparables(Comparables comparables) {
+        this.comparables.setValue(comparables);
     }
 
-    @Getter
-    private final String[] modelsName;
+    private final MutableLiveData<CompareProductAdapter> compareProductAdapter = new MutableLiveData<>(new CompareProductAdapter());
 
-    @Getter
-    private final String[] parametersName;
-
-    private CompareViewModel(Comparables comparables, String[] parametersName) {
-        this.parametersName = parametersName;
-        this.modelsName = new String[] { comparables.getModel_1().getName(), comparables.getModel_2().getName() };
-        this.parameters = new ArrayList<>();
-        comparables.getParameters().forEach(param -> this.parameters.add(new MutableLiveData<>(param)));
+    public LiveData<CompareProductAdapter> getAdapterLiveData() {
+        return compareProductAdapter;
     }
 
-    public static CompareViewModel getInstance(ViewModelStoreOwner owner, Comparables comparables, String[] parametersName) {
+    private CompareViewModel() {
+        this.comparables.observeForever(comparables -> Objects.requireNonNull(compareProductAdapter.getValue()).setParameters(comparables.getParameters()));
+    }
+
+    public static CompareViewModel getInstance(ViewModelStoreOwner owner) {
         return new ViewModelProvider(owner, new ViewModelProvider.Factory() {
             @androidx.annotation.NonNull
             @Override
             public <T extends ViewModel> T create(@androidx.annotation.NonNull Class<T> modelClass) {
-                return (T) new CompareViewModel(comparables, parametersName);
+                return (T) new CompareViewModel();
             }
         }).get(CompareViewModel.class);
     }

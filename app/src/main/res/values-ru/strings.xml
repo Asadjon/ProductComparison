@@ -43,4 +43,9 @@
         <item>Есть</item>
         <item>Нет</item>
     </string-array>
+    <string name="energy_consumption">Максимальное энергопотребление</string>
+    <string name="monthly">Ежемесячно</string>
+    <string name="yearly">Ежегодно</string>
+    <string name="unit_energy_kw">кВт/ч</string>
+    <string name="currency">сум</string>
 </resources>

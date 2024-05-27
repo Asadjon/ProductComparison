@@ -21,7 +21,9 @@ import lombok.ToString;
 public abstract class Data implements Iterable<ParameterRow.Param>, IParam {
 
     @SerializedName("name") private String name;
-    protected final List<ParameterRow.Param> paramList = new ArrayList<>();
+
+    @SerializedName("energy_consumption")
+    protected Data.Values<Integer> energyConsumption;
 
     @Override
     public final void forEach(@NonNull Consumer<? super ParameterRow.Param> action) {

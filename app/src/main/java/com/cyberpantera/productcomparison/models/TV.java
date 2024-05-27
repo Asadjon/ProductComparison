@@ -1,11 +1,10 @@
 package com.cyberpantera.productcomparison.models;
 
-import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.annotations.ParamsNameResId;
 import com.google.gson.annotations.SerializedName;
 
 @ParamsNameResId(ParamsNameResId.Values.TV)
-public class TV extends Data {
+public final class TV extends Data {
     @SerializedName("diagonal_size")
     private Data.Values<Integer> diagonalSize;
     @SerializedName("os_type")
@@ -22,8 +21,6 @@ public class TV extends Data {
     private Data.Values<String> ram;
     @SerializedName("flash_memory")
     private Data.Values<String> flashMemory;
-    @SerializedName("energy_consumption")
-    private Data.Values<String> energyConsumption;
 
     @Override
     public Data.Values<?>[] getParams() {

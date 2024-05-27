@@ -42,4 +42,9 @@
         <item>There is</item>
         <item>No</item>
     </string-array>
+    <string name="energy_consumption">Energy consumption</string>
+    <string name="monthly">Monthly</string>
+    <string name="yearly">Yearly</string>
+    <string name="unit_energy_kw">kW/h</string>
+    <string name="currency">soum</string>
 </resources>

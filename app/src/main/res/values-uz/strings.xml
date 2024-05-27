@@ -43,4 +43,9 @@
         <item>Mavjud</item>
         <item>Yo‘q</item>
     </string-array>
+    <string name="energy_consumption">Energiya iste‘moli</string>
+    <string name="monthly">Oylik</string>
+    <string name="yearly">Yillik</string>
+    <string name="unit_energy_kw">kVt/s</string>
+    <string name="currency">so‘m</string>
 </resources>

@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
 import com.cyberpantera.productcomparison.databinding.FragmentCompareBinding;
+import com.cyberpantera.productcomparison.fragments.energy_calculation.EnergyCalculationFragment;
+import com.cyberpantera.productcomparison.models.ParameterRow;
 
 public class CompareFragment extends Fragment {
     private static final int flags = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_FULLSCREEN |
@@ -25,6 +27,7 @@ public class CompareFragment extends Fragment {
 
     private MainActivityViewModel mainActivityVM;
     private CompareViewModel viewModel;
+    private EnergyCalculationFragment calculationFragment;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -48,7 +51,15 @@ public class CompareFragment extends Fragment {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         LifecycleOwner owner = getViewLifecycleOwner();
 
+        calculationFragment = EnergyCalculationFragment.newInstance();
+
         mainActivityVM.getComparablesLiveData().observe(owner, viewModel::setComparables);
+        viewModel.getAdapterLiveData().observe(owner, adapter -> adapter.setOnClickListener(this::onClick));
+    }
+
+    private void onClick(ParameterRow parameter) {
+        if (!(calculationFragment.isAdded() && calculationFragment.isVisible()))
+            calculationFragment.show(requireActivity().getSupportFragmentManager());
     }
 
     @Override

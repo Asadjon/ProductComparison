@@ -3,10 +3,8 @@
     "name": "TV",
     "string_index": 0,
     "drawable": "products/tv.png",
-    "data": {
-      "path": "products/tv.json",
-      "type": "com.cyberpantera.productcomparison.models.TV"
-    }
+    "daily_working_hours": 10,
+    "data_path": "products/tv.json"
   },
   {
     "name": "Air conditioner",

@@ -5,8 +5,6 @@ import android.content.res.Resources;
 import com.cyberpantera.productcomparison.App;
 import com.cyberpantera.productcomparison.annotations.ParamsNameResId;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import lombok.AllArgsConstructor;
@@ -23,9 +21,9 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
-public class Comparables {
-    private Data model_1;
-    private Data model_2;
+public class Comparables<T extends Data> {
+    private T model_1;
+    private T model_2;
 
     public ParameterRow[] getParameters() {
         String[] paramNames = getDataParamNames();

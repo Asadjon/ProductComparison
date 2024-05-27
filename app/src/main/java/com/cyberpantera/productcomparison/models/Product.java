@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor
@@ -22,6 +23,7 @@ public class Product<T extends Data> {
     private final String name;
     private final int nameIndex;
     private final Drawable src;
+    private final int dailyWorkingHours;
     private final List<T> dataList;
 
     public String getTranslatableName() {

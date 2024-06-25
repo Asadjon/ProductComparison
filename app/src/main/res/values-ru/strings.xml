@@ -34,7 +34,7 @@
         <item>Кнопка голосового управления на пульте</item>
         <item>Оперативная память</item>
         <item>Флеш память</item>
-        <item>Максимальное энергопотребление</item>
+        <item>Энергопотребление</item>
     </string-array>
     <string-array name="about_names">
         <item>Нет данных</item>
@@ -43,7 +43,7 @@
         <item>Есть</item>
         <item>Нет</item>
     </string-array>
-    <string name="energy_consumption">Максимальное энергопотребление</string>
+    <string name="energy_consumption">Энергопотребление</string>
     <string name="monthly">Ежемесячно</string>
     <string name="yearly">Ежегодно</string>
     <string name="unit_energy_kw">кВт/ч</string>

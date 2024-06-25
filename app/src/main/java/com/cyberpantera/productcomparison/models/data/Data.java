@@ -1,13 +1,12 @@
-package com.cyberpantera.productcomparison.models;
+package com.cyberpantera.productcomparison.models.data;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cyberpantera.productcomparison.models.ParameterRow;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.function.Consumer;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +23,11 @@ public abstract class Data implements Iterable<ParameterRow.Param>, IParam {
 
     @SerializedName("energy_consumption")
     protected Data.Values<Integer> energyConsumption;
+
+    @Override
+    public Data.Values<?>[] getParams() {
+        return new Data.Values<?>[] { energyConsumption };
+    }
 
     @Override
     public final void forEach(@NonNull Consumer<? super ParameterRow.Param> action) {

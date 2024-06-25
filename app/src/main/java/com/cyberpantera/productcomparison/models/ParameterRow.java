@@ -5,9 +5,8 @@ import androidx.databinding.ObservableArrayList;
 
 import com.cyberpantera.productcomparison.App;
 import com.cyberpantera.productcomparison.R;
-import com.google.gson.reflect.TypeToken;
+import com.cyberpantera.productcomparison.models.data.Data;
 
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 

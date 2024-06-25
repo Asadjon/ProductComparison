@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.cyberpantera.productcomparison.adapters.SelectProductAdapter;
-import com.cyberpantera.productcomparison.models.Data;
+import com.cyberpantera.productcomparison.models.data.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
 import java.util.List;
@@ -147,12 +147,6 @@ public class SelectModelViewModel extends ViewModel {
     }
 
     public static SelectModelViewModel getInstance(ViewModelStoreOwner owner) {
-        return new ViewModelProvider(owner, new ViewModelProvider.Factory() {
-            @androidx.annotation.NonNull
-            @Override
-            public <T extends ViewModel> T create(@androidx.annotation.NonNull Class<T> modelClass) {
-                return (T) new SelectModelViewModel();
-            }
-        }).get(SelectModelViewModel.class);
+        return new ViewModelProvider(owner).get(SelectModelViewModel.class);
     }
 }

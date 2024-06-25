@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.cyberpantera.productcomparison.databinding.ProductItemBinding;
 import com.cyberpantera.productcomparison.fragments.select_model.SelectModelViewModel;
-import com.cyberpantera.productcomparison.models.Data;
+import com.cyberpantera.productcomparison.models.data.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
 import java.util.ArrayList;

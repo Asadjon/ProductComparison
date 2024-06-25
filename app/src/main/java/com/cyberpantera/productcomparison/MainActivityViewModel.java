@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.cyberpantera.productcomparison.json.ProductRepository;
 import com.cyberpantera.productcomparison.models.Comparables;
-import com.cyberpantera.productcomparison.models.Data;
+import com.cyberpantera.productcomparison.models.data.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
 import java.util.ArrayList;
@@ -53,11 +53,13 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void setComparables(Data model_1, Data model_2) {
-        Comparables<Data> c = getComparables();
-        if (c == null) c = new Comparables<>();
-        c.setModel_1(model_1);
-        c.setModel_2(model_2);
-        comparables.setValue(c);
+        this.setComparables(getComparables(), model_1, model_2);
+    }
+
+    private void setComparables(Comparables<Data> comparables, Data model_1, Data model_2) {
+        comparables.setModel_1(model_1);
+        comparables.setModel_2(model_2);
+        this.comparables.setValue(comparables);
     }
 
     private MainActivityViewModel() {
@@ -68,9 +70,8 @@ public class MainActivityViewModel extends ViewModel {
 
         this.comparableProduct.observeForever(product -> {
             List<Data> dataList = product.getDataList();
-            Comparables<Data> comparables = getComparables();
-            if (comparables == null || !dataList.isEmpty())
-                setComparables(dataList.get(0), dataList.get(1));
+            Comparables<Data> comparables = new Comparables<>(product);
+            setComparables(comparables, dataList.get(0), dataList.get(1));
         });
 
         productListLiveData.setValue(productRepository.getProductList());

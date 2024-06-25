@@ -1,27 +1,22 @@
 package com.cyberpantera.productcomparison.models;
 
-import android.content.res.Resources;
-
 import com.cyberpantera.productcomparison.App;
-import com.cyberpantera.productcomparison.annotations.ParamsNameResId;
+import com.cyberpantera.productcomparison.models.data.Data;
 
-import java.util.Objects;
-
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
 public class Comparables<T extends Data> {
+    private final Product<T> product;
     private T model_1;
     private T model_2;
 
@@ -36,13 +31,6 @@ public class Comparables<T extends Data> {
     }
 
     private String[] getDataParamNames() {
-        Class<?> dataClass = model_1.getClass();
-
-        if (dataClass.isAnnotationPresent(ParamsNameResId.class)) {
-            Resources resources = App.getInstance().getResources();
-            return resources.getStringArray(Objects.requireNonNull(dataClass.getAnnotation(ParamsNameResId.class)).value().getOrder());
-        }
-
-        return new String[0];
+        return App.getInstance().getResources().getStringArray(product.getParamsResId());
     }
 }

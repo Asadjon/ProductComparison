@@ -18,7 +18,7 @@ import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.adapters.SelectProductAdapter;
 import com.cyberpantera.productcomparison.databinding.FragmentSelectModelBinding;
 import com.cyberpantera.productcomparison.models.Comparables;
-import com.cyberpantera.productcomparison.models.Data;
+import com.cyberpantera.productcomparison.models.data.Data;
 
 import java.util.List;
 

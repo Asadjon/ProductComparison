@@ -1,0 +1,35 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+dependencies {
+
+    implementation libs.javax.annotation.api
+    annotationProcessor libs.javax.annotation.api
+
+    implementation libs.javapoet
+
+    implementation libs.auto.service.annotations
+    annotationProcessor libs.auto.service
+}
+
+// Ensure that the service provider file for the processor is included in the JAR
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'DataAnnotationProcessor',
+                'Implementation-Version': '1.0'
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    with copySpec {
+        from('src/main/resources') {
+            include 'META-INF/services/*'
+        }
+    }
+}

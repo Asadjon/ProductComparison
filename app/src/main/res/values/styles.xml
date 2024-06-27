@@ -28,6 +28,8 @@
     </style>
 
     <style name="compare_param">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
         <item name="android:gravity">center_vertical|start</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
@@ -40,26 +42,20 @@
     </style>
 
     <style name="compare_param.name">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="theme">@style/Compare_Param.Name</item>
         <item name="android:textAppearance">@style/Compare_Param.Name</item>
     </style>
 
     <style name="compare_param.value">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
         <item name="android:textStyle">italic</item>
-        <item name="android:layout_weight">0.7</item>
+        <item name="android:layout_weight">1</item>
         <item name="theme">@style/Compare_Param.Value</item>
         <item name="android:textAppearance">@style/Compare_Param.Value</item>
     </style>
 
     <style name="compare_param.header_name">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">0.7</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textAlignment">center</item>
         <item name="theme">@style/Compare_Param.Header</item>
         <item name="android:textAppearance">@style/Compare_Param.Header</item>

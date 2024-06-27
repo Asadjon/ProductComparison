@@ -38,7 +38,7 @@ public class EnergyCalculationFragment extends BottomSheetDialogFragment {
 
         FragmentEnergyCalculationBinding binding = FragmentEnergyCalculationBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(owner);
-        binding.setViewModel(viewModel);
+        binding.compare.setViewModel(viewModel);
         return binding.getRoot();
     }
 
@@ -46,15 +46,9 @@ public class EnergyCalculationFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mainActivityVM.getComparablesLiveData().observe(owner, comparables -> {
-            viewModel.setComparablesName(comparables.getModel_1().getName(), comparables.getModel_2().getName());
-            EnergyCalculatorService.Values<EnergyCalculatorService.Values<Float>> modelsEnergyConsumption = EnergyCalculatorService.getModelsEnergyConsumption(
-                    comparables.getModel_1().getEnergyConsumption().getActual(),
-                    comparables.getModel_2().getEnergyConsumption().getActual(),
-                    mainActivityVM.getComparableProduct().getDailyWorkingHours());
+        mainActivityVM.getComparablesLiveData().observe(owner, viewModel::setComparables);
 
-            viewModel.getAdapterLiveData().getValue().setParameters(EnergyCalculatorService.getParameters(modelsEnergyConsumption).toArray(new ParameterRow[0]));
-        });
+        viewModel.setIsHideCorresponds(true);
     }
 
     public void show(FragmentManager fragmentManager) {

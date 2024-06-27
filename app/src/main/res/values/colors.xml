@@ -27,4 +27,6 @@
     <color name="shadow">#2E2E2E</color>
     <color name="text">#232323</color>
     <color name="text2">#FFFFFF</color>
+    <color name="correspond_yes">#00C853</color>
+    <color name="correspond_no">#D50000</color>
 </resources>

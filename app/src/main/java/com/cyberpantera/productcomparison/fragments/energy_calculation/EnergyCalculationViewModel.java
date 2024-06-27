@@ -1,36 +1,27 @@
 package com.cyberpantera.productcomparison.fragments.energy_calculation;
 
-import androidx.annotation.Size;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
-import com.cyberpantera.productcomparison.adapters.CompareProductAdapter;
-import com.cyberpantera.productcomparison.models.Comparables;
+import com.cyberpantera.productcomparison.fragments.compare.TableViewModel;
 import com.cyberpantera.productcomparison.models.ParameterRow;
 
-public class EnergyCalculationViewModel extends ViewModel {
+import java.util.Objects;
 
-    private final MutableLiveData<String[]> comparablesName = new MutableLiveData<>();
+public class EnergyCalculationViewModel extends TableViewModel {
 
-    public LiveData<String[]> getComparablesNameLiveData() {
-        return comparablesName;
-    }
+    private EnergyCalculationViewModel() {
+        super();
+        getComparablesLiveData().observeForever(comparables -> {
+        EnergyCalculatorService.Values<EnergyCalculatorService.Values<Float>> modelsEnergyConsumption = EnergyCalculatorService.getModelsEnergyConsumption(
+                comparables.getModel_1().getEnergyConsumption().getActual(),
+                comparables.getModel_2().getEnergyConsumption().getActual(),
+                comparables.getProduct().getDailyWorkingHours());
 
-    public void setComparablesName(@Size(min = 2, max = 2, value = 2)  String... comparablesName) {
-        this.comparablesName.setValue(comparablesName);
-    }
-
-    private final MutableLiveData<CompareProductAdapter> adapter = new MutableLiveData<>(new CompareProductAdapter());
-
-    public LiveData<CompareProductAdapter> getAdapterLiveData() {
-        return adapter;
-    }
-
-    public void setAdapter(CompareProductAdapter adapter) {
-        this.adapter.setValue(adapter);
+        Objects.requireNonNull(getAdapterLiveData().getValue())
+                .setParameters(EnergyCalculatorService.getParameters(modelsEnergyConsumption).toArray(new ParameterRow[0]));
+    });
     }
 
     public static EnergyCalculationViewModel getInstance(ViewModelStoreOwner owner) {

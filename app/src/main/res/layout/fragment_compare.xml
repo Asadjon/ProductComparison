@@ -4,12 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.cyberpantera.productcomparison.fragments.compare.CompareViewModel" />
+            type="com.cyberpantera.productcomparison.fragments.compare.TableViewModel" />
+
         <variable
             name="adapter"
             type="com.cyberpantera.productcomparison.adapters.CompareProductAdapter" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -24,14 +28,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="0.35714285714285714285714285714286"
-                android:text="@string/characteristics"
-                style="@style/compare_param.name" />
+                style="@style/compare_param.name"
+                android:layout_weight="1"
+                android:text="@string/characteristics" />
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2.333333333333333"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -41,14 +45,14 @@
                     tools:showIn="@layout/fragment_compare">
 
                     <TextView
+                        style="@style/compare_param.header_name"
                         android:layout_weight="1"
-                        android:text="@{viewModel.comparablesLiveData.model_1.name}"
-                        style="@style/compare_param.header_name"/>
+                        android:text="@{viewModel.comparablesLiveData.model_1.name}" />
 
                     <TextView
+                        style="@style/compare_param.header_name"
                         android:layout_weight="1"
-                        android:text="@{viewModel.comparablesLiveData.model_2.name}"
-                        style="@style/compare_param.header_name"/>
+                        android:text="@{viewModel.comparablesLiveData.model_2.name}" />
 
                 </LinearLayout>
 
@@ -59,20 +63,32 @@
                     tools:showIn="@layout/fragment_compare">
 
                     <TextView
-                        android:text="@string/stated"
-                        style="@style/compare_param.header_name"/>
+                        style="@style/compare_param.header_name"
+                        android:text="@string/stated" />
 
                     <TextView
-                        android:text="@string/actually"
-                        style="@style/compare_param.header_name"/>
+                        style="@style/compare_param.header_name"
+                        android:text="@string/actually" />
+
+                    <ImageView
+                        style="@style/compare_param.header_name"
+                        android:layout_weight=".3"
+                        android:src="@drawable/baseline_compare_arrows_24"
+                        android:visibility="@{viewModel.isHideCorresponds ? View.GONE : View.VISIBLE}" />
 
                     <TextView
-                        android:text="@string/stated"
-                        style="@style/compare_param.header_name"/>
+                        style="@style/compare_param.header_name"
+                        android:text="@string/stated" />
 
                     <TextView
-                        android:text="@string/actually"
-                        style="@style/compare_param.header_name"/>
+                        style="@style/compare_param.header_name"
+                        android:text="@string/actually" />
+
+                    <ImageView
+                        style="@style/compare_param.header_name"
+                        android:layout_weight=".3"
+                        android:src="@drawable/baseline_compare_arrows_24"
+                        android:visibility="@{viewModel.isHideCorresponds ? View.GONE : View.VISIBLE}" />
 
                 </LinearLayout>
 

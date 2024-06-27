@@ -6,6 +6,14 @@
         <variable
             name="parameter"
             type="com.cyberpantera.productcomparison.models.ParameterRow" />
+
+        <variable
+            name="isHideCorresponds"
+            type="Boolean" />
+
+        <import type="com.cyberpantera.productcomparison.models.ParameterRow.Corresponds" />
+
+        <import type="android.view.View" />
     </data>
 
     <LinearLayout
@@ -15,26 +23,44 @@
         tools:showIn="@layout/fragment_compare">
 
         <TextView
+            style="@style/compare_param.name"
             android:layout_weight="1"
-            android:text="@{parameter.name}"
-            style="@style/compare_param.name" />
+            android:text="@{parameter.name}" />
 
-        <TextView
-            android:text="@{parameter.products[0].values[0]}"
-            style="@style/compare_param.value"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.333333333333333"
+            android:orientation="horizontal">
 
-        <TextView
-            android:text="@{parameter.products[0].values[1]}"
-            style="@style/compare_param.value"/>
+            <TextView
+                style="@style/compare_param.value"
+                android:text="@{parameter.products.get(0).values.get(0)}" />
 
-        <TextView
-            android:text="@{parameter.products[1].values[0]}"
-            style="@style/compare_param.value"/>
+            <TextView
+                style="@style/compare_param.value"
+                android:text="@{parameter.products.get(0).values.get(1)}" />
 
-        <TextView
-            android:text="@{parameter.products[1].values[1]}"
-            style="@style/compare_param.value" />
+            <TextView
+                style="@style/compare_param"
+                android:layout_weight=".3"
+                android:background="@{Corresponds.getColor(parameter.products.get(0).correspond)}"
+                android:visibility="@{isHideCorresponds ? View.GONE : View.VISIBLE}" />
 
+            <TextView
+                style="@style/compare_param.value"
+                android:text="@{parameter.products.get(1).values.get(0)}" />
+
+            <TextView
+                style="@style/compare_param.value"
+                android:text="@{parameter.products.get(1).values.get(1)}" />
+
+            <TextView
+                style="@style/compare_param"
+                android:layout_weight=".3"
+                android:background="@{Corresponds.getColor(parameter.products.get(1).correspond)}"
+                android:visibility="@{isHideCorresponds ? View.GONE : View.VISIBLE}" />
+        </LinearLayout>
     </LinearLayout>
 
 </layout>

@@ -14,11 +14,13 @@ import java.util.function.Consumer;
 
 import lombok.Setter;
 
+@SuppressLint("NotifyDataSetChanged")
 public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAdapter.MyViewHolder> {
 
     @Setter
     private Consumer<ParameterRow> onClickListener;
     private ParameterRow[] parameters = new ParameterRow[0];
+    private boolean isHideCorresponds = false;
 
     @NonNull
     @Override
@@ -28,7 +30,7 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding(parameters[position], onClickListener);
+        holder.binding(parameters[position], onClickListener, isHideCorresponds);
     }
 
     @Override
@@ -41,9 +43,13 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
         return position >= (parameters.length - 1) ? 1 : super.getItemViewType(position);
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void setParameters(ParameterRow[] parameters) {
         this.parameters = parameters;
+        notifyDataSetChanged();
+    }
+
+    public void setHideCorresponds(boolean isHideCorresponds) {
+        this.isHideCorresponds = isHideCorresponds;
         notifyDataSetChanged();
     }
 
@@ -61,8 +67,9 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
             this.viewType = viewType;
         }
 
-        public void binding(ParameterRow parameter, Consumer<ParameterRow> onClickListener) {
+        public void binding(ParameterRow parameter, Consumer<ParameterRow> onClickListener, boolean isHideCorresponds) {
             this.binding.setParameter(parameter);
+            this.binding.setIsHideCorresponds(isHideCorresponds);
             if (viewType == 1)
                 this.binding.getRoot().setOnClickListener(v -> {
                     if (onClickListener != null) onClickListener.accept(parameter);

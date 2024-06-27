@@ -1,6 +1,7 @@
 package com.cyberpantera.lib;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
@@ -10,8 +11,6 @@ import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
@@ -36,9 +35,6 @@ public class DataAnnotationProcessor extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
-
-        TypeSpec.Builder dataAnnotationsClass = TypeSpec.classBuilder(DATA_ANNOTATIONS_CLASS_NAME)
-                .addModifiers(Modifier.PUBLIC);
 
         StringBuilder format = new StringBuilder("List.of(");
         List<List<Object>> args = new ArrayList<>();
@@ -67,17 +63,20 @@ public class DataAnnotationProcessor extends AbstractProcessor {
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
                 .initializer(format.append(')').toString(), args.stream().flatMap(List::stream).toArray());
 
-        dataAnnotationsClass.addField(dataAnnotationListField.build());
-        dataAnnotationsClass.addType(generateDataValueClass());
-        generateGeneratedClass(dataAnnotationsClass.build());
+        generateGeneratedClass(TypeSpec.classBuilder(DATA_ANNOTATIONS_CLASS_NAME)
+                .addModifiers(Modifier.PUBLIC)
+                .addField(dataAnnotationListField.build())
+                .addType(generateDataValueClass())
+                .build());
         return true;
     }
 
     private TypeSpec generateDataValueClass() {
         TypeSpec.Builder dataAnnotationClass = TypeSpec.classBuilder(DATA_ANNOTATION_CLASS_NAME)
-                .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .addAnnotation(ClassName.get("lombok", "AllArgsConstructor"))
-                .addAnnotation(ClassName.get("lombok", "Setter"))
+                .addModifiers(Modifier.PUBLIC, Modifier.STATIC, Modifier.FINAL)
+                .addAnnotation(AnnotationSpec.builder(ClassName.get("lombok", "AllArgsConstructor"))
+                        .addMember("access", "$T.PRIVATE", ClassName.get("lombok", "AccessLevel"))
+                        .build())
                 .addAnnotation(ClassName.get("lombok", "Getter"))
                 .addAnnotation(ClassName.get("lombok", "ToString"))
 

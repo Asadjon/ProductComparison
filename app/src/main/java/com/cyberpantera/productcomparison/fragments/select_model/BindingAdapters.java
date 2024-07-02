@@ -3,10 +3,6 @@ package com.cyberpantera.productcomparison.fragments.select_model;
 import android.widget.NumberPicker;
 
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.InverseBindingAdapter;
-import androidx.lifecycle.MutableLiveData;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -20,14 +16,10 @@ public class BindingAdapters {
             view.setValue(value);
     }
 
-    @InverseBindingAdapter(attribute = "value")
-    public static int getNumberPickerValue(NumberPicker view) {
-        return view.getValue();
-    }
-
     @BindingAdapter("valueChanged")
     public static void setNumberPickerListeners(NumberPicker view, final OnValueChangeListener onValueChange) {
-        view.setOnValueChangedListener((picker, oldVal, newVal) -> onValueChange.onValueChange(newVal));
+        if (onValueChange != null)
+            view.setOnValueChangedListener((picker, oldVal, newVal) -> onValueChange.onValueChange(newVal));
     }
 
     @BindingAdapter("displayedValues")

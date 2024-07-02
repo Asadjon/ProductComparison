@@ -12,12 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
 import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.adapters.SelectProductAdapter;
 import com.cyberpantera.productcomparison.databinding.FragmentSelectModelBinding;
 import com.cyberpantera.productcomparison.models.Comparables;
+import com.cyberpantera.productcomparison.models.Product;
 import com.cyberpantera.productcomparison.models.data.Data;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class SelectModelFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
+        mainActivityVM = MainActivityViewModel.getInstance(requireActivity());
         viewModel = SelectModelViewModel.getInstance(this);
 
         FragmentSelectModelBinding binding = FragmentSelectModelBinding.inflate(inflater, container, false);
@@ -44,40 +44,28 @@ public class SelectModelFragment extends Fragment {
 
         LifecycleOwner owner = getViewLifecycleOwner();
 
-        mainActivityVM.getProductListLD().observe(owner, products -> viewModel.setProductList(products));
-
-        mainActivityVM.getComparablesLiveData().observe(owner, comparables -> {
-            List<Data> dataList = viewModel.getSelectedProduct().getDataList();
-            viewModel.setValuesOfNumPickers(dataList.indexOf(comparables.getModel_1()), dataList.indexOf(comparables.getModel_2()));
+        viewModel.getSelectedProductIndexLiveData().observe(owner, productIndex -> {
+            Product<Data> product = mainActivityVM.getProductList().get(viewModel.getSelectedProductIndex());
+            viewModel.setDisplayedValuesOfNumPicker(product);
+            mainActivityVM.setComparableProduct(product);
         });
 
-        viewModel.setSelectProductAdapter(new SelectProductAdapter(requireContext(), viewModel, owner));
-
-        viewModel.getSelectedProductLiveData().observe(owner, product -> mainActivityVM.setComparableProduct(viewModel.getSelectedProduct()));
-
-        viewModel.getSelectedProductLiveData().observe(owner, product -> {
-            Comparables comparables = mainActivityVM.getComparables();
-            List<Data> dataList = viewModel.getSelectedProduct().getDataList();
-            viewModel.setValueOfNumPicker(0, dataList.indexOf(comparables.getModel_1()));
-            viewModel.setValueOfNumPicker(1, dataList.indexOf(comparables.getModel_2()));
+        viewModel.onChangeValuesOfNumPicker().observe(owner, values -> {
+            List<Data> dataList = mainActivityVM.getComparables().getProduct().getDataList();
+            mainActivityVM.setComparables(dataList.get(values[0]), dataList.get(values[1]));
         });
 
-        viewModel.getOnValueChangeOfNumPicker(0).observe(owner, value ->
-                mainActivityVM.setComparables(getModel(value), mainActivityVM.getComparables().getModel_2()));
+        viewModel.setOnClickCompare(() -> NavHostFragment.findNavController(SelectModelFragment.this)
+                .navigate(R.id.action_SelectModelFragment_to_CompareFragment));
 
-        viewModel.getOnValueChangeOfNumPicker(1).observe(owner, value ->
-                mainActivityVM.setComparables(mainActivityVM.getComparables().getModel_1(), getModel(value)));
+        List<Product<Data>> productList = mainActivityVM.getProductList();
+        Comparables<Data> comparables = mainActivityVM.getComparables();
+        Product<Data> product = comparables.getProduct();
+        List<Data> dataList = product.getDataList();
 
-        viewModel.getOnClickCompareLiveData().observe(owner, clicked -> {
-            if (clicked) {
-                NavHostFragment.findNavController(SelectModelFragment.this)
-                        .navigate(R.id.action_SelectModelFragment_to_CompareFragment);
-                viewModel.onClickCompareComplete();
-            }
-        });
-    }
-
-    private Data getModel(int index) {
-        return viewModel.getSelectedProduct().getDataList().get(index);
+        viewModel.setSelectedProductIndex(productList.indexOf(product));
+        viewModel.setDisplayedValuesOfNumPicker(product);
+        viewModel.setValuesOfNumPickers(dataList.indexOf(comparables.getModel_1()), dataList.indexOf(comparables.getModel_2()));
+        viewModel.setAdapter(new SelectProductAdapter(requireContext(), productList, viewModel::setSelectedProductIndex));
     }
 }

@@ -1,6 +1,7 @@
 package com.cyberpantera.productcomparison.models;
 
-import com.cyberpantera.productcomparison.App;
+import android.content.res.Resources;
+
 import com.cyberpantera.productcomparison.models.data.Data;
 
 import lombok.EqualsAndHashCode;
@@ -20,17 +21,17 @@ public class Comparables<T extends Data> {
     private T model_1;
     private T model_2;
 
-    public ParameterRow[] getParameters() {
-        String[] paramNames = getDataParamNames();
+    public ParameterRow[] getParameters(Resources resources) {
+        String[] paramNames = getDataParamNames(resources);
         ParameterRow[] parameters = new ParameterRow[paramNames.length];
 
         for (int i = 0; i < paramNames.length; i++)
-            parameters[i] = new ParameterRow(paramNames[i], model_1.getParam(i), model_2.getParam(i));
+            parameters[i] = new ParameterRow(paramNames[i], model_1.getParam(resources, i), model_2.getParam(resources, i));
 
         return parameters;
     }
 
-    private String[] getDataParamNames() {
-        return App.getInstance().getResources().getStringArray(product.getParamsResId());
+    private String[] getDataParamNames(Resources resources) {
+        return resources.getStringArray(product.getParamsResId());
     }
 }

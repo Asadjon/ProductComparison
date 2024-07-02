@@ -1,13 +1,11 @@
 package com.cyberpantera.productcomparison.models.data;
 
-import androidx.annotation.NonNull;
+import android.content.res.Resources;
+
 import androidx.annotation.Nullable;
 
 import com.cyberpantera.productcomparison.models.ParameterRow;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.Iterator;
-import java.util.function.Consumer;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -17,7 +15,7 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode
 @ToString
-public abstract class Data implements Iterable<ParameterRow.Param>, IParam {
+public abstract class Data implements IParam {
 
     @SerializedName("name") private String name;
 
@@ -29,43 +27,8 @@ public abstract class Data implements Iterable<ParameterRow.Param>, IParam {
         return new Data.Values<?>[] { energyConsumption };
     }
 
-    @Override
-    public final void forEach(@NonNull Consumer<? super ParameterRow.Param> action) {
-        for (ParameterRow.Param param : this)
-            action.accept(param);
-    }
-
-    @NonNull
-    @Override
-    public final  Iterator<ParameterRow.Param> iterator() {
-        return new DataIterator(getParamsSize());
-    }
-
-    protected final class DataIterator implements Iterator<ParameterRow.Param> {
-        private int currentIndex = -1;
-        private final int size;
-
-        DataIterator(int size) {
-            this.size = size;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return ++currentIndex > size;
-        }
-
-        @Override
-        public ParameterRow.Param next() {
-            return getParam(currentIndex);
-        }
-    }
-
-    public final ParameterRow.Param getParam(int index) {
-        return getParams()[index].getParam();
-    }
-
-    public final int getParamsSize() {
-        return getParams().length;
+    public final ParameterRow.Param getParam(Resources resources, int index) {
+        return getParams()[index].getParam(resources);
     }
 
     @AllArgsConstructor
@@ -76,8 +39,8 @@ public abstract class Data implements Iterable<ParameterRow.Param>, IParam {
         @SerializedName("stated_values") private T stated;
         @SerializedName("actual_values") private T actual;
 
-        protected ParameterRow.Param getParam() {
-            return new ParameterRow.Param(String.valueOf(stated), String.valueOf(actual));
+        protected ParameterRow.Param getParam(Resources resources) {
+            return new ParameterRow.Param(resources, String.valueOf(stated), String.valueOf(actual));
         }
     }
 

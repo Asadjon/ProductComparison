@@ -1,8 +1,9 @@
 package com.cyberpantera.productcomparison.fragments.energy_calculation;
 
+import android.content.res.Resources;
+
 import androidx.annotation.Size;
 
-import com.cyberpantera.productcomparison.App;
 import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.models.ParameterRow;
 
@@ -48,14 +49,14 @@ public final class EnergyCalculatorService {
         return new Values<>(getEnergyConsumption(value1, dailyWorkingHours), getEnergyConsumption(value2, dailyWorkingHours));
     }
 
-    public static List<ParameterRow> getParameters(Values<Values<Float>> modelsEnergyConsumption) {
+    public static List<ParameterRow> getParameters(Values<Values<Float>> modelsEnergyConsumption, Resources resources) {
         List<ParameterRow> parameters = new ArrayList<>();
-        parameters.add(new ParameterRow(App.getInstance().getString(R.string.unit_energy_kw), modelsEnergyConsumption.value1.getParam(), modelsEnergyConsumption.value2.getParam()));
+        parameters.add(new ParameterRow(resources.getString(R.string.unit_energy_kw), modelsEnergyConsumption.value1.getParam(resources), modelsEnergyConsumption.value2.getParam(resources)));
 
         float max = Math.max(modelsEnergyConsumption.value1.value2, modelsEnergyConsumption.value2.value2);
 
         for (Values<Integer> tariff : tariffs) {
-                parameters.add(getParameter(tariff, modelsEnergyConsumption.value1, modelsEnergyConsumption.value2));
+                parameters.add(getParameter(resources, tariff, modelsEnergyConsumption.value1, modelsEnergyConsumption.value2));
             if (max < tariff.value1) break;
         }
 
@@ -63,12 +64,13 @@ public final class EnergyCalculatorService {
     }
 
     @SafeVarargs
-    private static ParameterRow getParameter(Values<Integer> tariff, @Size(min = 2, max = 2, value = 2) Values<Float>... modelsValue) {
+    private static ParameterRow getParameter(Resources resources, Values<Integer> tariff, @Size(min = 2, max = 2, value = 2) Values<Float>... modelsValue) {
         Values<Integer>[] calculationPrices = calculatePrice(modelsValue, tariff.value2);
-        return new ParameterRow(tariff.value2 + " " + App.getInstance().getString(R.string.currency), calculationPrices[0].getParam(), calculationPrices[1].getParam());
+        return new ParameterRow(tariff.value2 + " " + resources.getString(R.string.currency), calculationPrices[0].getParam(resources), calculationPrices[1].getParam(resources));
     }
 
     @Size(min = 2, max = 2, value = 2)
+    @SuppressWarnings("unchecked")
     private static Values<Integer>[] calculatePrice(@Size(min = 2, max = 2, value = 2) Values<Float>[] modelsValue, int price) {
         return new Values[] {
                 new Values<>((int) (modelsValue[0].value1 * price), (int) (modelsValue[0].value2 * price)),
@@ -83,8 +85,8 @@ public final class EnergyCalculatorService {
         private final T value1;
         private final T value2;
 
-        public ParameterRow.Param getParam() {
-            return new ParameterRow.Param(String.valueOf(value1), String.valueOf(value2));
+        public ParameterRow.Param getParam(Resources resources) {
+            return new ParameterRow.Param(resources, String.valueOf(value1), String.valueOf(value2));
         }
     }
 }

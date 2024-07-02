@@ -1,11 +1,14 @@
 package com.cyberpantera.productcomparison.models;
 
-import androidx.annotation.ColorInt;
+import android.content.Context;
+import android.content.res.Resources;
+
 import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Size;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableArrayList;
 
-import com.cyberpantera.productcomparison.App;
 import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.models.data.Data;
 
@@ -36,8 +39,8 @@ public class ParameterRow {
         private final ObservableArrayList<String> values = new ObservableArrayList<>();
         private final Corresponds correspond;
 
-        public Param(@Size(min = 1, max = 2, value = 2) String... values) {
-            String[] aboutsName = App.getInstance().getResources().getStringArray(R.array.about_names);
+        public Param(@NonNull Resources resources, @Size(min = 1, max = 2, value = 2) String... values) {
+            String[] aboutsName = resources.getStringArray(R.array.about_names);
 
             Object[] objects = new Object[2];
 
@@ -68,9 +71,8 @@ public class ParameterRow {
             return No;
         }
 
-        @ColorInt
-        public static int getColor(Corresponds correspond) {
-            return App.getInstance().getResources().getColor(correspond.ordinal);
+        public int getColor(Context context) {
+            return ContextCompat.getColor(context, ordinal);
         }
     }
 }

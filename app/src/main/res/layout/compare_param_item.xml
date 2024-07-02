@@ -11,6 +11,10 @@
             name="isHideCorresponds"
             type="Boolean" />
 
+        <variable
+            name="context"
+            type="android.content.Context" />
+
         <import type="com.cyberpantera.productcomparison.models.ParameterRow.Corresponds" />
 
         <import type="android.view.View" />
@@ -44,8 +48,9 @@
             <TextView
                 style="@style/compare_param"
                 android:layout_weight=".3"
-                android:background="@{Corresponds.getColor(parameter.products.get(0).correspond)}"
-                android:visibility="@{isHideCorresponds ? View.GONE : View.VISIBLE}" />
+                android:background="@{parameter.products.get(0).correspond.getColor(context)}"
+                android:visibility="@{isHideCorresponds ? View.GONE : View.VISIBLE}"
+                tools:ignore="NestedWeights" />
 
             <TextView
                 style="@style/compare_param.value"
@@ -58,7 +63,7 @@
             <TextView
                 style="@style/compare_param"
                 android:layout_weight=".3"
-                android:background="@{Corresponds.getColor(parameter.products.get(1).correspond)}"
+                android:background="@{parameter.products.get(1).correspond.getColor(context)}"
                 android:visibility="@{isHideCorresponds ? View.GONE : View.VISIBLE}" />
         </LinearLayout>
     </LinearLayout>

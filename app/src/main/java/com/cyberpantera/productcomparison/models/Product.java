@@ -4,8 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.IdRes;
 
-import com.cyberpantera.productcomparison.App;
-import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.models.data.Data;
 
 import java.util.List;
@@ -35,10 +33,6 @@ public class Product<T extends Data> {
 
     @IdRes
     private final int paramsResId;
-
-    public String getTranslatableName() {
-        return App.getInstance().getResources().getStringArray(R.array.product_catalog_name)[nameIndex];
-    }
 
     public List<String> getModelNameList() {
         return dataList.stream().map(Data::getName).collect(Collectors.toList());

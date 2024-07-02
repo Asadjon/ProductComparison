@@ -1,16 +1,17 @@
 package com.cyberpantera.productcomparison.fragments.compare;
 
+import android.app.Application;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.cyberpantera.productcomparison.adapters.CompareProductAdapter;
 import com.cyberpantera.productcomparison.models.Comparables;
 import com.cyberpantera.productcomparison.models.data.Data;
 
-import java.util.Objects;
-
-public abstract class TableViewModel  extends ViewModel {
+public abstract class TableViewModel  extends AndroidViewModel {
 
     protected final MutableLiveData<Comparables<Data>> comparables = new MutableLiveData<>();
 
@@ -28,6 +29,10 @@ public abstract class TableViewModel  extends ViewModel {
         return compareProductAdapter;
     }
 
+    public CompareProductAdapter getAdapter() {
+        return compareProductAdapter.getValue();
+    }
+
     protected final MutableLiveData<Boolean> isHideCorresponds = new MutableLiveData<>(false);
 
     public LiveData<Boolean> isHideCorresponds() {
@@ -38,7 +43,9 @@ public abstract class TableViewModel  extends ViewModel {
         this.isHideCorresponds.setValue(isHideCorresponds);
     }
 
-    public TableViewModel() {
-        isHideCorresponds().observeForever(isHideCorresponds -> Objects.requireNonNull(getAdapterLiveData().getValue()).setHideCorresponds(isHideCorresponds));
+    public TableViewModel(@NonNull Application application) {
+        super(application);
+
+        isHideCorresponds().observeForever(isHideCorresponds -> getAdapter().setHideCorresponds(isHideCorresponds));
     }
 }

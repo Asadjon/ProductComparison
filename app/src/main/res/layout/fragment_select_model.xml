@@ -20,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:adapter="@{viewModel.selectProductAdapter}"
-            app:selectedItemPosition="@{viewModel.selectedProductIndex}"
-            app:onPageChange="@{viewModel.selectProductAdapter}"/>
+            android:adapter="@{viewModel.adapter}"
+            app:selectedItemPosition="@{viewModel.selectedProductIndexLiveData}"
+            app:onPageChange="@{viewModel.adapter}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,28 +34,29 @@
                 style="@style/select_model.parent_of_number_picker">
 
                 <NumberPicker
-                    app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                    app:maxValue="@{viewModel.displayedValuesOfNumPicker.size() - 1}"
                     app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
                     app:value="@{viewModel.getValueOfNumPicker(0)}"
-                    app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(0)}"
+                    app:valueChanged="@{value -> viewModel.setValueOfNumPickers(0, value)}"
                     style="@style/select_model.number_picker"/>
 
             </androidx.cardview.widget.CardView>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                app:enabled="@{viewModel.compareButtonEnabledLiveData}"
+                style="@style/select_model.compare_button"
+                android:importantForAccessibility="no"
+                android:onClick="@{() -> viewModel.onClickCompare.run()}"
                 android:src="@drawable/baseline_compare_arrows_24"
-                android:onClick="@{() -> viewModel.onClickCompare()}"
-                style="@style/select_model.compare_button" />
+                app:enabled="@{viewModel.compareButtonEnabledLiveData}" />
 
             <androidx.cardview.widget.CardView
                 style="@style/select_model.parent_of_number_picker">
 
                 <NumberPicker
-                    app:maxValue="@{viewModel.maxValueOfNumPicker}"
+                    app:maxValue="@{viewModel.displayedValuesOfNumPicker.size() - 1}"
                     app:displayedValues="@{viewModel.displayedValuesOfNumPicker}"
                     app:value="@{viewModel.getValueOfNumPicker(1)}"
-                    app:valueChanged="@{viewModel.getOnValueChangeListenerOfNumPicker(1)}"
+                    app:valueChanged="@{value -> viewModel.setValueOfNumPickers(1, value)}"
                     style="@style/select_model.number_picker"/>
 
             </androidx.cardview.widget.CardView>

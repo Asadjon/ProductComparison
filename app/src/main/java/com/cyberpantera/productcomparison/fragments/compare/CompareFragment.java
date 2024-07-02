@@ -13,8 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
+import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.databinding.FragmentCompareBinding;
 import com.cyberpantera.productcomparison.fragments.energy_calculation.EnergyCalculationFragment;
 import com.cyberpantera.productcomparison.models.ParameterRow;
@@ -33,7 +33,7 @@ public class CompareFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = CompareViewModel.getInstance(this);
-        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
+        mainActivityVM = MainActivityViewModel.getInstance(requireActivity());
 
         FragmentCompareBinding binding = FragmentCompareBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
@@ -58,7 +58,8 @@ public class CompareFragment extends Fragment {
     }
 
     private void onClick(ParameterRow parameter) {
-        if (!(calculationFragment.isAdded() && calculationFragment.isVisible()))
+        if (parameter.getName().equals(getResources().getString(R.string.energy_consumption)) &&
+                !(calculationFragment.isAdded() && calculationFragment.isVisible()))
             calculationFragment.show(requireActivity().getSupportFragmentManager());
     }
 

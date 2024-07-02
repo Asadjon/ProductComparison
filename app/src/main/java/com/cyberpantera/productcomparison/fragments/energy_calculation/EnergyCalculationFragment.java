@@ -11,10 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cyberpantera.productcomparison.MainActivity;
 import com.cyberpantera.productcomparison.MainActivityViewModel;
 import com.cyberpantera.productcomparison.databinding.FragmentEnergyCalculationBinding;
-import com.cyberpantera.productcomparison.models.ParameterRow;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class EnergyCalculationFragment extends BottomSheetDialogFragment {
@@ -33,7 +31,7 @@ public class EnergyCalculationFragment extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         viewModel = EnergyCalculationViewModel.getInstance(this);
-        mainActivityVM = MainActivityViewModel.getInstance((MainActivity) requireActivity());
+        mainActivityVM = MainActivityViewModel.getInstance(requireActivity());
         owner = getViewLifecycleOwner();
 
         FragmentEnergyCalculationBinding binding = FragmentEnergyCalculationBinding.inflate(inflater, container, false);

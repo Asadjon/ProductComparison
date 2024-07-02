@@ -25,22 +25,17 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return MyViewHolder.getInstance(parent, viewType);
+        return new MyViewHolder(CompareParamItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.binding(parameters[position], onClickListener, isHideCorresponds);
+        holder.binding(parameters[position]);
     }
 
     @Override
     public int getItemCount() {
         return parameters.length;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position >= (parameters.length - 1) ? 1 : super.getItemViewType(position);
     }
 
     public void setParameters(ParameterRow[] parameters) {
@@ -53,27 +48,21 @@ public class CompareProductAdapter extends RecyclerView.Adapter<CompareProductAd
         notifyDataSetChanged();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
+    public final class MyViewHolder extends RecyclerView.ViewHolder {
         private final CompareParamItemBinding binding;
-        private final int viewType;
 
-        public static MyViewHolder getInstance(ViewGroup parent, int viewType) {
-            return new MyViewHolder(CompareParamItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false), viewType);
-        }
-
-        private MyViewHolder(@NonNull CompareParamItemBinding binding, int viewType) {
+        private MyViewHolder(@NonNull CompareParamItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            this.viewType = viewType;
         }
 
-        public void binding(ParameterRow parameter, Consumer<ParameterRow> onClickListener, boolean isHideCorresponds) {
+        public void binding(ParameterRow parameter) {
             this.binding.setParameter(parameter);
             this.binding.setIsHideCorresponds(isHideCorresponds);
-            if (viewType == 1)
-                this.binding.getRoot().setOnClickListener(v -> {
-                    if (onClickListener != null) onClickListener.accept(parameter);
-                });
+            this.binding.setContext(binding.getContext());
+            this.binding.getRoot().setOnClickListener(v -> {
+                if (onClickListener != null) onClickListener.accept(parameter);
+            });
         }
     }
 }

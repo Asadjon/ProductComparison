@@ -6,31 +6,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.cyberpantera.productcomparison.R;
 import com.cyberpantera.productcomparison.databinding.ProductItemBinding;
-import com.cyberpantera.productcomparison.fragments.select_model.SelectModelViewModel;
 import com.cyberpantera.productcomparison.models.data.Data;
 import com.cyberpantera.productcomparison.models.Product;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SelectProductAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
 
     private final Context context;
-    private final SelectModelViewModel viewModel;
-    private List<Product<Data>> productList = new ArrayList<>();
+    private final Consumer<Integer> setterSelectedProductIndex;
+    private List<Product<Data>> productList;
 
-    public SelectProductAdapter(Context context, SelectModelViewModel viewModel, LifecycleOwner owner) {
+    public SelectProductAdapter(Context context, List<Product<Data>> productList, Consumer<Integer> setterSelectedProductIndex) {
         this.context = context;
-        this.viewModel = viewModel;
-        this.viewModel.getProductListLiveData().observe(owner, products -> {
-            productList = products;
-            notifyDataSetChanged();
-        });
+        this.productList = productList;
+        this.setterSelectedProductIndex = setterSelectedProductIndex;
+    }
+
+    public void setProductList(List<Product<Data>> productList) {
+        this.productList = productList;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -48,6 +49,7 @@ public class SelectProductAdapter extends PagerAdapter implements ViewPager.OnPa
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         ProductItemBinding binding = ProductItemBinding.inflate((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE));
         binding.setProduct(productList.get(position));
+        binding.setProductCatalogNames(context.getResources().getStringArray(R.array.product_catalog_name));
         container.addView(binding.getRoot());
 
         return binding.getRoot();
@@ -59,13 +61,16 @@ public class SelectProductAdapter extends PagerAdapter implements ViewPager.OnPa
     }
 
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) { }
-
-    @Override
-    public void onPageSelected(int position) {
-        viewModel.setSelectedProduct(productList.get(position));
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) { }
+    public void onPageSelected(int position) {
+        if (setterSelectedProductIndex != null)
+            setterSelectedProductIndex.accept(position);
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
 }

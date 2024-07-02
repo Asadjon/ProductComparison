@@ -1,25 +1,20 @@
 package com.cyberpantera.productcomparison.fragments.compare;
 
-import androidx.lifecycle.ViewModel;
+import android.app.Application;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
-import java.util.Objects;
+public final class CompareViewModel extends TableViewModel {
 
-public class CompareViewModel extends TableViewModel {
-
-    private CompareViewModel() {
-        super();
-        getComparablesLiveData().observeForever(comparables -> Objects.requireNonNull(getAdapterLiveData().getValue()).setParameters(comparables.getParameters()));
+    public CompareViewModel(@NonNull Application application) {
+        super(application);
+        getComparablesLiveData().observeForever(comparables ->
+                getAdapter().setParameters(comparables.getParameters(application.getResources())));
     }
 
     public static CompareViewModel getInstance(ViewModelStoreOwner owner) {
-        return new ViewModelProvider(owner, new ViewModelProvider.Factory() {
-            @androidx.annotation.NonNull
-            @Override
-            public <T extends ViewModel> T create(@androidx.annotation.NonNull Class<T> modelClass) {
-                return (T) new CompareViewModel();
-            }
-        }).get(CompareViewModel.class);
+        return new ViewModelProvider(owner).get(CompareViewModel.class);
     }
 }

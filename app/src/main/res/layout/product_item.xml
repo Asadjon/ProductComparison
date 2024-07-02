@@ -6,6 +6,9 @@
         <variable
             name="product"
             type="com.cyberpantera.productcomparison.models.Product" />
+        <variable
+            name="productCatalogNames"
+            type="String[]" />
     </data>
 
     <LinearLayout
@@ -29,7 +32,7 @@
 
                 <TextView
                     style="@style/select_model.product_name"
-                    android:text="@{product.translatableName}" />
+                    android:text="@{productCatalogNames[product.nameIndex]}" />
 
             </LinearLayout>
 
